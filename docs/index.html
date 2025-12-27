@@ -16,10 +16,12 @@
             --primary: #667eea;
             --secondary: #764ba2;
             --accent: #f093fb;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --text: #333;
-            --text-light: #666;
+            --dark: #0f0f1e;
+            --bg-dark: #1a1a2e;
+            --bg-card: #252540;
+            --light: #2a2a4a;
+            --text: #e0e0e0;
+            --text-light: #b0b0b0;
         }
 
         html {
@@ -31,6 +33,7 @@
             line-height: 1.6;
             color: var(--text);
             overflow-x: hidden;
+            background: var(--dark);
         }
 
         /* Custom Scrollbar */
@@ -39,7 +42,7 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--light);
+            background: var(--dark);
         }
 
         ::-webkit-scrollbar-thumb {
@@ -52,16 +55,16 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(26, 26, 46, 0.95);
             backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
             z-index: 1000;
             transition: all 0.3s ease;
         }
 
         nav.scrolled {
             padding: 10px 0;
-            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.7);
         }
 
         .nav-container {
@@ -244,6 +247,71 @@
             transform: translateY(-5px) scale(1.2);
         }
 
+        /* Discord Status Badge */
+        .discord-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-top: 30px;
+            font-size: 1em;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .discord-status:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse-status 2s infinite;
+        }
+
+        .status-online {
+            background: #43b581;
+            box-shadow: 0 0 10px #43b581;
+        }
+
+        .status-idle {
+            background: #faa61a;
+            box-shadow: 0 0 10px #faa61a;
+        }
+
+        .status-dnd {
+            background: #f04747;
+            box-shadow: 0 0 10px #f04747;
+        }
+
+        .status-offline {
+            background: #747f8d;
+        }
+
+        @keyframes pulse-status {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .discord-username {
+            font-weight: 600;
+        }
+
+        .discord-activity {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
         /* Section Styles */
         section {
             padding: 100px 40px;
@@ -309,17 +377,17 @@
         }
 
         .skill-card {
-            background: white;
+            background: var(--bg-card);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
             text-align: center;
         }
 
         .skill-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
         }
 
         .skill-icon {
@@ -343,7 +411,7 @@
 
         /* Projects Section */
         #projects {
-            background: var(--light);
+            background: var(--bg-dark);
         }
 
         .projects-grid {
@@ -353,16 +421,16 @@
         }
 
         .project-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
         }
 
         .project-image {
@@ -398,11 +466,11 @@
         }
 
         .tag {
-            background: var(--light);
+            background: rgba(102, 126, 234, 0.2);
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.85em;
-            color: var(--primary);
+            color: #a0b0ff;
             font-weight: 500;
         }
 
@@ -457,13 +525,15 @@
             font-family: inherit;
             font-size: 1em;
             transition: all 0.3s ease;
+            background: var(--bg-card);
+            color: var(--text);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
         }
 
         .form-group textarea {
@@ -509,7 +579,7 @@
 
         /* Footer */
         footer {
-            background: var(--dark);
+            background: #0a0a15;
             color: white;
             text-align: center;
             padding: 40px 20px;
@@ -607,7 +677,19 @@
                 <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i></a>
+                <a href="mailto:nexusbot0@proton.me"><i class="fas fa-envelope"></i></a>
+            </div>
+            
+            <!-- Discord Status -->
+            <div class="discord-status" id="discord-status">
+                <i class="fab fa-discord" style="font-size: 1.5em;"></i>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="status-indicator status-offline" id="status-indicator"></span>
+                        <span class="discord-username" id="discord-username">Loading...</span>
+                    </div>
+                    <div class="discord-activity" id="discord-activity"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -680,137 +762,29 @@
 
     <!-- Projects Section -->
     <section id="projects">
-        <h2 class="section-title">Featured Projects</h2>
-        <p class="section-subtitle">Some of my recent work</p>
-        <div class="projects-grid">
-            <div class="project-card fade-in">
+        <h2 class="section-title">Featured Project</h2>
+        <p class="section-subtitle">My main work</p>
+        <div class="projects-grid" style="justify-content: center;">
+            <div class="project-card fade-in" style="max-width: 500px;">
                 <div class="project-image">
-                    <i class="fas fa-robot"></i>
+                    <i class="fas fa-shield-alt"></i>
                 </div>
                 <div class="project-content">
-                    <h3>Nexus Bot</h3>
+                    <h3>🛡️ Nexus Bot</h3>
                     <p>
-                        A powerful Discord bot with advanced features including moderation, 
-                        analytics, and custom commands. Built with Node.js and Discord.js.
+                        Open-source Discord security bot with AI-powered threat detection, 
+                        anti-raid protection, and automated moderation. Features 85+ commands 
+                        and sub-millisecond detection speeds. 100% free alternative to premium bots.
                     </p>
                     <div class="project-tags">
                         <span class="tag">Node.js</span>
                         <span class="tag">Discord.js</span>
+                        <span class="tag">AI Security</span>
                         <span class="tag">MongoDB</span>
                     </div>
                     <div class="project-links">
-                        <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                        <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card fade-in">
-                <div class="project-image">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
-                <div class="project-content">
-                    <h3>E-Commerce Platform</h3>
-                    <p>
-                        A full-featured e-commerce platform with payment integration, 
-                        inventory management, and real-time order tracking.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Express</span>
-                        <span class="tag">Stripe</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                        <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card fade-in">
-                <div class="project-image">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <div class="project-content">
-                    <h3>Analytics Dashboard</h3>
-                    <p>
-                        Real-time analytics dashboard with interactive charts, data visualization, 
-                        and customizable reports for business insights.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Vue.js</span>
-                        <span class="tag">Chart.js</span>
-                        <span class="tag">Python</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                        <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card fade-in">
-                <div class="project-image">
-                    <i class="fas fa-tasks"></i>
-                </div>
-                <div class="project-content">
-                    <h3>Task Management App</h3>
-                    <p>
-                        Collaborative task management application with real-time updates, 
-                        team collaboration features, and progress tracking.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Socket.io</span>
-                        <span class="tag">PostgreSQL</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                        <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card fade-in">
-                <div class="project-image">
-                    <i class="fas fa-blog"></i>
-                </div>
-                <div class="project-content">
-                    <h3>Blog Platform</h3>
-                    <p>
-                        Modern blogging platform with markdown support, SEO optimization, 
-                        and social sharing features. Built with Next.js.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Next.js</span>
-                        <span class="tag">Markdown</span>
-                        <span class="tag">Vercel</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                        <a href="#"><i class="fab fa-github"></i> GitHub</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card fade-in">
-                <div class="project-image">
-                    <i class="fas fa-weather-sun"></i>
-                </div>
-                <div class="project-content">
-                    <h3>Weather App</h3>
-                    <p>
-                        Beautiful weather application with location-based forecasts, 
-                        interactive maps, and weather alerts using real-time API data.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">API</span>
-                        <span class="tag">CSS3</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                        <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://nexusbot-official.github.io/nexus/" target="_blank"><i class="fas fa-external-link-alt"></i> Website</a>
+                        <a href="https://github.com/Sentinelbot-official/Sentinel" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                     </div>
                 </div>
             </div>
@@ -821,36 +795,17 @@
     <section id="contact">
         <h2 class="section-title">Get In Touch</h2>
         <p class="section-subtitle">Let's work together</p>
-        <div class="contact-content">
-            <form class="contact-form" id="contactForm">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required placeholder="Your message here..."></textarea>
-                </div>
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i> Send Message
-                </button>
-            </form>
-            <div class="contact-info">
+        <div class="contact-content" style="text-align: center;">
+            <p style="color: var(--text-light); margin-bottom: 30px; font-size: 1.1em;">
+                Have a question or want to work together? Feel free to reach out!
+            </p>
+            <a href="mailto:nexusbot0@proton.me" class="btn" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; display: inline-flex; padding: 18px 50px; font-size: 1.1em;">
+                <i class="fas fa-envelope"></i> Send Me an Email
+            </a>
+            <div class="contact-info" style="margin-top: 40px;">
                 <div class="contact-info-item">
                     <i class="fas fa-envelope"></i>
-                    <span>your.email@example.com</span>
-                </div>
-                <div class="contact-info-item">
-                    <i class="fas fa-phone"></i>
-                    <span>+1 (555) 123-4567</span>
-                </div>
-                <div class="contact-info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Your City, Your Country</span>
+                    <span>nexusbot0@proton.me</span>
                 </div>
             </div>
         </div>
@@ -858,11 +813,73 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
+        <p>&copy; 2025 Your Name. All rights reserved.</p>
         <p>Built with ❤️ and lots of coffee</p>
     </footer>
 
     <script>
+        // Discord Status using Lanyard API
+        const DISCORD_ID = '1392165977793368124';
+        
+        async function updateDiscordStatus() {
+            try {
+                const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+                const data = await response.json();
+                
+                if (data.success && data.data) {
+                    const user = data.data;
+                    const statusIndicator = document.getElementById('status-indicator');
+                    const username = document.getElementById('discord-username');
+                    const activity = document.getElementById('discord-activity');
+                    
+                    // Update username
+                    username.textContent = user.discord_user.username;
+                    
+                    // Update status indicator
+                    statusIndicator.className = 'status-indicator';
+                    switch(user.discord_status) {
+                        case 'online':
+                            statusIndicator.classList.add('status-online');
+                            break;
+                        case 'idle':
+                            statusIndicator.classList.add('status-idle');
+                            break;
+                        case 'dnd':
+                            statusIndicator.classList.add('status-dnd');
+                            break;
+                        default:
+                            statusIndicator.classList.add('status-offline');
+                    }
+                    
+                    // Update activity
+                    if (user.activities && user.activities.length > 0) {
+                        const mainActivity = user.activities[0];
+                        if (mainActivity.type === 0) { // Playing
+                            activity.textContent = `Playing ${mainActivity.name}`;
+                        } else if (mainActivity.type === 2) { // Listening
+                            activity.textContent = `Listening to ${mainActivity.name}`;
+                        } else if (mainActivity.type === 4) { // Custom Status
+                            activity.textContent = mainActivity.state || '';
+                        } else {
+                            activity.textContent = mainActivity.name;
+                        }
+                    } else if (user.discord_status === 'offline') {
+                        activity.textContent = 'Offline';
+                    } else {
+                        activity.textContent = 'Online on Discord';
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to fetch Discord status:', error);
+                document.getElementById('discord-username').textContent = 'Discord';
+                document.getElementById('discord-activity').textContent = 'Status unavailable';
+            }
+        }
+        
+        // Update status on load and every 30 seconds
+        updateDiscordStatus();
+        setInterval(updateDiscordStatus, 30000);
+    
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -903,27 +920,6 @@
 
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
-        });
-
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
-
-            // Here you would typically send the data to a server
-            console.log('Form submitted:', formData);
-            
-            // Show success message
-            alert('Thank you for your message! I\'ll get back to you soon.');
-            
-            // Reset form
-            this.reset();
         });
 
         // Mobile menu toggle (you can expand this for a full mobile menu)

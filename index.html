@@ -1,0 +1,1671 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexus Bot Stats - Growth Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          Cantarell, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      /* Custom scrollbar styling */
+      body::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      body::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+
+      body::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+      }
+
+      body::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 60px 40px;
+        max-width: 900px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        margin: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      /* Custom scrollbar for container */
+      .container::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      .container::-webkit-scrollbar-thumb {
+        background: #667eea;
+        border-radius: 10px;
+      }
+
+      .container::-webkit-scrollbar-thumb:hover {
+        background: #764ba2;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 40px;
+        font-size: 2.5em;
+      }
+
+      .stat-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 50px 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+      }
+
+      .stat-label {
+        font-size: 1.2em;
+        opacity: 0.9;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .stat-value {
+        font-size: 5em;
+        font-weight: bold;
+        transition:
+          transform 0.3s ease,
+          color 0.3s ease;
+      }
+
+      .stat-value.increase {
+        animation: pulseGreen 0.5s ease;
+      }
+
+      .stat-value.decrease {
+        animation: pulseRed 0.5s ease;
+      }
+
+      @keyframes pulseGreen {
+        0%,
+        100% {
+          transform: scale(1);
+          color: white;
+        }
+        50% {
+          transform: scale(1.1);
+          color: #4ade80;
+        }
+      }
+
+      @keyframes pulseRed {
+        0%,
+        100% {
+          transform: scale(1);
+          color: white;
+        }
+        50% {
+          transform: scale(1.1);
+          color: #f87171;
+        }
+      }
+
+      .loading {
+        text-align: center;
+        color: #666;
+        font-size: 1.5em;
+        padding: 60px 20px;
+      }
+
+      .error {
+        background: #fee;
+        color: #c33;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .last-updated {
+        text-align: center;
+        color: #666;
+        font-size: 0.9em;
+        margin-top: 20px;
+      }
+
+      .new-servers-indicator {
+        text-align: center;
+        color: #4ade80;
+        font-size: 1.1em;
+        font-weight: 600;
+        margin-top: 15px;
+        padding: 10px 20px;
+        background: rgba(74, 222, 128, 0.2);
+        border-radius: 10px;
+        display: block;
+        width: 100%;
+      }
+
+      .new-servers-indicator.negative {
+        color: #f87171 !important;
+        background: rgba(248, 113, 113, 0.3) !important;
+      }
+
+      .change-indicator {
+        position: absolute;
+        font-size: 2em;
+        font-weight: bold;
+        pointer-events: none;
+        animation: floatUp 1s ease-out forwards;
+      }
+
+      @keyframes floatUp {
+        0% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-100px);
+        }
+      }
+
+      .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background: #ffd700;
+        position: absolute;
+        animation: confettiFall linear forwards;
+        pointer-events: none;
+      }
+
+      @keyframes confettiFall {
+        0% {
+          transform: translateY(-100vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .mini-stat-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+      }
+
+      .mini-stat-label {
+        font-size: 0.9em;
+        opacity: 0.9;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .mini-stat-value {
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .progress-section {
+        margin: 30px 0;
+        text-align: left;
+      }
+
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .progress-bar-container {
+        background: #e0e0e0;
+        border-radius: 20px;
+        height: 30px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .progress-bar {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        height: 100%;
+        border-radius: 20px;
+        transition: width 0.5s ease;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 15px;
+        color: white;
+        font-weight: bold;
+      }
+
+      .milestones {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-size: 0.85em;
+        color: #666;
+      }
+
+      .milestone {
+        text-align: center;
+        flex: 1;
+      }
+
+      .milestone.reached {
+        color: #4ade80;
+        font-weight: bold;
+      }
+
+      .growth-stats {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 20px 0;
+        text-align: left;
+      }
+
+      .growth-stat-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .growth-stat-row:last-child {
+        border-bottom: none;
+      }
+
+      .growth-stat-label {
+        color: #666;
+        font-weight: 500;
+      }
+
+      .growth-stat-value {
+        color: #333;
+        font-weight: bold;
+      }
+
+      .chart-container {
+        margin: 30px 0;
+        height: 250px;
+      }
+
+      .countdown-banner {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 20px;
+        margin: 30px 0;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+      }
+
+      .countdown-number {
+        font-size: 4em;
+        font-weight: bold;
+        margin: 10px 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .countdown-label {
+        font-size: 1.3em;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        opacity: 0.95;
+      }
+
+      .countdown-sublabel {
+        font-size: 1em;
+        margin-top: 10px;
+        opacity: 0.9;
+      }
+
+      .projection-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 15px;
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .projection-title {
+        font-size: 1.1em;
+        opacity: 0.9;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .projection-date {
+        font-size: 2.5em;
+        font-weight: bold;
+        margin: 10px 0;
+      }
+
+      .projection-details {
+        font-size: 0.95em;
+        opacity: 0.85;
+        margin-top: 10px;
+      }
+
+      .daily-tracker {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 20px 0;
+      }
+
+      .daily-tracker h3 {
+        color: #333;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+
+      .daily-goal-card {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 10px 0;
+        border-left: 4px solid #667eea;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .daily-goal-label {
+        color: #666;
+        font-weight: 500;
+      }
+
+      .daily-goal-value {
+        color: #667eea;
+        font-weight: bold;
+        font-size: 1.3em;
+      }
+
+      .goal-reached {
+        background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+        margin: 20px 0;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 0 20px 10px rgba(74, 222, 128, 0);
+        }
+      }
+
+      .velocity-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 0.9em;
+      }
+
+      .velocity-accelerating {
+        background: rgba(74, 222, 128, 0.2);
+        color: #22c55e;
+      }
+
+      .velocity-steady {
+        background: rgba(102, 126, 234, 0.2);
+        color: #667eea;
+      }
+
+      .velocity-decelerating {
+        background: rgba(248, 113, 113, 0.2);
+        color: #f87171;
+      }
+
+      .velocity-arrow {
+        font-size: 1.5em;
+        animation: bounce 1s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      .records-section {
+        background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 15px;
+        margin: 20px 0;
+      }
+
+      .records-section h3 {
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 1.3em;
+      }
+
+      .records-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
+
+      .record-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .record-icon {
+        font-size: 2em;
+        margin-bottom: 10px;
+      }
+
+      .record-value {
+        font-size: 1.8em;
+        font-weight: bold;
+        margin: 5px 0;
+      }
+
+      .record-label {
+        font-size: 0.9em;
+        opacity: 0.9;
+      }
+
+      .peak-hours-section {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 20px 0;
+      }
+
+      .peak-hours-section h3 {
+        color: #333;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+
+      .peak-hour-card {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-left: 4px solid #667eea;
+      }
+
+      .peak-hour-card.best {
+        border-left-color: #4ade80;
+      }
+
+      .peak-hour-card.worst {
+        border-left-color: #f87171;
+      }
+
+      .retention-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 15px;
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .retention-percentage {
+        font-size: 3em;
+        font-weight: bold;
+        margin: 15px 0;
+      }
+
+      .retention-details {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .retention-stat {
+        flex: 1;
+        min-width: 120px;
+      }
+
+      .retention-stat-value {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+
+      .retention-stat-label {
+        font-size: 0.9em;
+        opacity: 0.9;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🤖 Nexus Bot - Growth Tracker</h1>
+
+      <!-- Main Server Count -->
+      <div id="stats-container">
+        <div class="loading">Loading stats...</div>
+      </div>
+
+      <!-- Progress to Goal -->
+      <div class="progress-section" id="progress-section" style="display: none">
+        <div class="progress-header">
+          <span id="progress-goal-label">Progress to Next Milestone</span>
+          <span id="progress-percentage">0%</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progress-bar" style="width: 0%">
+            <span id="progress-text"></span>
+          </div>
+        </div>
+        <div class="milestones">
+          <div class="milestone" id="milestone-50">
+            <div>🎯</div>
+            <div>50</div>
+          </div>
+          <div class="milestone" id="milestone-75">
+            <div>🎯</div>
+            <div>75</div>
+          </div>
+          <div class="milestone" id="milestone-82">
+            <div>🏆</div>
+            <div>82</div>
+          </div>
+          <div class="milestone" id="milestone-100">
+            <div>🚀</div>
+            <div>100</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Countdown Banner -->
+      <div id="countdown-banner" style="display: none"></div>
+
+      <!-- Projected Verification Date -->
+      <div id="projection-section" style="display: none"></div>
+
+      <!-- Daily Progress Tracker -->
+      <div class="daily-tracker" id="daily-tracker" style="display: none">
+        <h3>📅 Daily Progress Tracker</h3>
+        <div id="daily-goals"></div>
+      </div>
+
+      <!-- Records Section -->
+      <div class="records-section" id="records-section" style="display: none">
+        <h3>🏆 Growth Records</h3>
+        <div class="records-grid" id="records-grid"></div>
+      </div>
+
+      <!-- Retention Rate -->
+      <div
+        class="retention-section"
+        id="retention-section"
+        style="display: none"
+      >
+        <h3>📊 Server Retention Rate</h3>
+        <div class="retention-percentage" id="retention-percentage">-</div>
+        <div class="retention-details" id="retention-details"></div>
+      </div>
+
+      <!-- Peak Hours Analysis -->
+      <div
+        class="peak-hours-section"
+        id="peak-hours-section"
+        style="display: none"
+      >
+        <h3>⏰ Peak Growth Hours</h3>
+        <div id="peak-hours-content"></div>
+      </div>
+
+      <!-- Growth Statistics -->
+      <div class="growth-stats" id="growth-stats" style="display: none">
+        <h3 style="margin-bottom: 15px; color: #333">📈 Growth Analytics</h3>
+        <div class="growth-stat-row">
+          <span class="growth-stat-label">Servers per Hour</span>
+          <span class="growth-stat-value" id="servers-per-hour">-</span>
+        </div>
+        <div class="growth-stat-row">
+          <span class="growth-stat-label" id="time-to-goal-label"
+            >Estimated Time to Next Goal</span
+          >
+          <span class="growth-stat-value" id="time-to-goal">-</span>
+        </div>
+        <div class="growth-stat-row">
+          <span class="growth-stat-label">Growth Trend</span>
+          <span class="growth-stat-value" id="growth-trend">-</span>
+        </div>
+      </div>
+
+      <!-- Additional Stats Grid -->
+      <div class="stats-grid" id="additional-stats" style="display: none">
+        <div class="mini-stat-card">
+          <div class="mini-stat-label">Total Users</div>
+          <div class="mini-stat-value" id="total-users">-</div>
+        </div>
+        <div class="mini-stat-card">
+          <div class="mini-stat-label">Uptime</div>
+          <div class="mini-stat-value" id="uptime">-</div>
+        </div>
+        <div class="mini-stat-card">
+          <div class="mini-stat-label">Memory</div>
+          <div class="mini-stat-value" id="memory">-</div>
+        </div>
+        <div class="mini-stat-card">
+          <div class="mini-stat-label">API Latency</div>
+          <div class="mini-stat-value" id="ping">-</div>
+        </div>
+      </div>
+
+      <!-- Historical Chart -->
+      <div class="chart-container" id="chart-container" style="display: none">
+        <canvas id="growth-chart"></canvas>
+      </div>
+
+      <div class="last-updated" id="last-updated"></div>
+    </div>
+
+    <script>
+      const DASHBOARD_URL = "https://regular-puma-clearly.ngrok-free.app";
+      const VERIFICATION_GOAL = 75; // Discord verification requirement
+      const MILESTONES = [
+        75, 82, 100, 150, 200, 250, 500, 750, 1000, 1500, 2000, 2500, 5000,
+        7500, 10000,
+      ];
+      let previousServerCount = null;
+      let serversAt75 = null;
+
+      // Get the next milestone based on current server count
+      function getNextMilestone(currentServers) {
+        for (let milestone of MILESTONES) {
+          if (currentServers < milestone) {
+            return milestone;
+          }
+        }
+        // If beyond all milestones, create dynamic ones (increments of 5000)
+        return Math.ceil(currentServers / 5000) * 5000 + 5000;
+      }
+
+      function getCurrentGoalLabel(currentServers, targetGoal) {
+        if (currentServers < VERIFICATION_GOAL) {
+          return "Verification (75)";
+        } else if (targetGoal === 82) {
+          return "Initial Goal (82)";
+        } else if (targetGoal >= 1000) {
+          return `${(targetGoal / 1000).toFixed(targetGoal % 1000 === 0 ? 0 : 1)}K Milestone`;
+        } else {
+          return `${targetGoal} Servers`;
+        }
+      }
+      let growthChart = null;
+
+      // Get initial server count from localStorage, or set it if not exists
+      let initialServerCount = localStorage.getItem("initialServerCount");
+      if (initialServerCount === null || initialServerCount === "null") {
+        initialServerCount = null; // Will be set on first load
+      } else {
+        initialServerCount = parseInt(initialServerCount, 10);
+        if (isNaN(initialServerCount)) {
+          initialServerCount = null;
+        }
+      }
+
+      // Historical data storage (last 24 hours)
+      function getHistoricalData() {
+        const data = localStorage.getItem("historicalData");
+        if (!data) return [];
+        try {
+          const parsed = JSON.parse(data);
+          // Filter to last 24 hours
+          const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+          return parsed.filter((d) => d.timestamp > oneDayAgo);
+        } catch {
+          return [];
+        }
+      }
+
+      function saveHistoricalData(serverCount) {
+        const historical = getHistoricalData();
+        historical.push({
+          timestamp: Date.now(),
+          servers: serverCount,
+        });
+        // Keep only last 24 hours
+        const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+        const filtered = historical.filter((d) => d.timestamp > oneDayAgo);
+        localStorage.setItem("historicalData", JSON.stringify(filtered));
+      }
+
+      function formatNumber(num) {
+        return num.toLocaleString();
+      }
+
+      function getOrdinalSuffix(day) {
+        if (day > 3 && day < 21) return "th";
+        switch (day % 10) {
+          case 1:
+            return "st";
+          case 2:
+            return "nd";
+          case 3:
+            return "rd";
+          default:
+            return "th";
+        }
+      }
+
+      function formatDateWithOrdinal(date) {
+        const weekday = date.toLocaleDateString("en-US", { weekday: "long" });
+        const month = date.toLocaleDateString("en-US", { month: "long" });
+        const day = date.getDate();
+        const year = date.getFullYear();
+        const time = date.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        });
+
+        return `${weekday}, ${month} ${day}${getOrdinalSuffix(day)}, ${year} at ${time}`;
+      }
+
+      function formatUptime(seconds) {
+        const days = Math.floor(seconds / 86400);
+        const hours = Math.floor((seconds % 86400) / 3600);
+        const mins = Math.floor((seconds % 3600) / 60);
+        if (days > 0) return `${days}d ${hours}h`;
+        if (hours > 0) return `${hours}h ${mins}m`;
+        return `${mins}m`;
+      }
+
+      function calculateGrowthRate() {
+        const historical = getHistoricalData();
+        if (historical.length < 2) return null;
+
+        const oldest = historical[0];
+        const newest = historical[historical.length - 1];
+        const timeDiff = (newest.timestamp - oldest.timestamp) / 1000 / 3600; // hours
+        const serverDiff = newest.servers - oldest.servers;
+
+        if (timeDiff === 0) return null;
+        return serverDiff / timeDiff; // servers per hour
+      }
+
+      function estimateTimeToGoal(
+        currentServers,
+        growthRate,
+        targetGoal = GOAL
+      ) {
+        const serversNeeded = targetGoal - currentServers;
+        if (serversNeeded <= 0) return "🎉 Goal reached!";
+        if (!growthRate || growthRate <= 0) return "📊 Gathering data...";
+
+        const hoursNeeded = serversNeeded / growthRate;
+
+        if (hoursNeeded < 1)
+          return `⏱️ ${Math.round(hoursNeeded * 60)} minutes`;
+        if (hoursNeeded < 24) return `⏰ ${Math.round(hoursNeeded)} hours`;
+        const days = Math.round(hoursNeeded / 24);
+        return `📅 ${days} day${days !== 1 ? "s" : ""}`;
+      }
+
+      function getGrowthTrend() {
+        const historical = getHistoricalData();
+        if (historical.length < 3) return "Gathering data...";
+
+        const recent = historical.slice(-5);
+        let increases = 0;
+        for (let i = 1; i < recent.length; i++) {
+          if (recent[i].servers > recent[i - 1].servers) increases++;
+        }
+
+        const ratio = increases / (recent.length - 1);
+        if (ratio > 0.6) return "📈 Accelerating";
+        if (ratio > 0.3) return "➡️ Steady";
+        return "📉 Slowing";
+      }
+
+      function getGrowthVelocity() {
+        const historical = getHistoricalData();
+        if (historical.length < 6) return null;
+
+        // Compare recent growth rate to older growth rate
+        const recent = historical.slice(-3);
+        const older = historical.slice(-6, -3);
+
+        const recentRate =
+          (recent[recent.length - 1].servers - recent[0].servers) /
+          ((recent[recent.length - 1].timestamp - recent[0].timestamp) /
+            1000 /
+            3600);
+        const olderRate =
+          (older[older.length - 1].servers - older[0].servers) /
+          ((older[older.length - 1].timestamp - older[0].timestamp) /
+            1000 /
+            3600);
+
+        const change = recentRate - olderRate;
+
+        if (change > 0.5)
+          return {
+            type: "accelerating",
+            arrow: "↗️",
+            change: change.toFixed(2),
+          };
+        if (change < -0.5)
+          return {
+            type: "decelerating",
+            arrow: "↘️",
+            change: Math.abs(change).toFixed(2),
+          };
+        return { type: "steady", arrow: "→", change: "0" };
+      }
+
+      function getRecords() {
+        const historical = getHistoricalData();
+        const records = JSON.parse(
+          localStorage.getItem("growthRecords") || "{}"
+        );
+
+        if (historical.length < 2) return records;
+
+        let bestHourGrowth = records.bestHour || 0;
+        let bestDayGrowth = records.bestDay || 0;
+        let longestStreak = records.longestStreak || 0;
+        let currentStreak = 0;
+
+        // Calculate hourly and daily growth
+        for (let i = 1; i < historical.length; i++) {
+          const timeDiff =
+            (historical[i].timestamp - historical[i - 1].timestamp) /
+            1000 /
+            3600;
+          const serverDiff = historical[i].servers - historical[i - 1].servers;
+
+          // Best hour (if data points are ~1 hour apart)
+          if (timeDiff <= 1.5 && serverDiff > bestHourGrowth) {
+            bestHourGrowth = serverDiff;
+          }
+
+          // Streak tracking
+          if (serverDiff > 0) {
+            currentStreak++;
+            if (currentStreak > longestStreak) {
+              longestStreak = currentStreak;
+            }
+          } else {
+            currentStreak = 0;
+          }
+        }
+
+        // Best day (last 24 hours)
+        if (historical.length > 0) {
+          const last24h = historical.filter(
+            (d) => d.timestamp > Date.now() - 24 * 60 * 60 * 1000
+          );
+          if (last24h.length >= 2) {
+            const dayGrowth =
+              last24h[last24h.length - 1].servers - last24h[0].servers;
+            if (dayGrowth > bestDayGrowth) {
+              bestDayGrowth = dayGrowth;
+            }
+          }
+        }
+
+        const updatedRecords = {
+          bestHour: bestHourGrowth,
+          bestDay: bestDayGrowth,
+          longestStreak: longestStreak,
+        };
+
+        localStorage.setItem("growthRecords", JSON.stringify(updatedRecords));
+        return updatedRecords;
+      }
+
+      function getPeakHours() {
+        const historical = getHistoricalData();
+        if (historical.length < 3) return null;
+
+        const hourlyGrowth = {};
+
+        for (let i = 1; i < historical.length; i++) {
+          const hour = new Date(historical[i].timestamp).getHours();
+          const growth = historical[i].servers - historical[i - 1].servers;
+
+          if (!hourlyGrowth[hour]) {
+            hourlyGrowth[hour] = { total: 0, count: 0 };
+          }
+          hourlyGrowth[hour].total += growth;
+          hourlyGrowth[hour].count++;
+        }
+
+        // Calculate averages
+        const averages = Object.entries(hourlyGrowth).map(([hour, data]) => ({
+          hour: parseInt(hour),
+          average: data.total / data.count,
+        }));
+
+        if (averages.length === 0) return null;
+
+        averages.sort((a, b) => b.average - a.average);
+
+        return {
+          best: averages[0],
+          worst: averages[averages.length - 1],
+        };
+      }
+
+      function getRetentionRate() {
+        const historical = getHistoricalData();
+        if (historical.length < 2) return null;
+
+        let totalGains = 0;
+        let totalLosses = 0;
+
+        for (let i = 1; i < historical.length; i++) {
+          const change = historical[i].servers - historical[i - 1].servers;
+          if (change > 0) {
+            totalGains += change;
+          } else if (change < 0) {
+            totalLosses += Math.abs(change);
+          }
+        }
+
+        const totalServers = totalGains + totalLosses;
+        const retentionRate =
+          totalServers > 0
+            ? ((totalGains - totalLosses) / totalGains) * 100
+            : 100;
+
+        return {
+          rate: Math.max(0, Math.min(100, retentionRate)),
+          gains: totalGains,
+          losses: totalLosses,
+          net: totalGains - totalLosses,
+        };
+      }
+
+      function updateCountdownBanner(currentServers) {
+        const banner = document.getElementById("countdown-banner");
+        if (!banner) return;
+
+        const nextMilestone = getNextMilestone(currentServers);
+        const serversNeeded = nextMilestone - currentServers;
+        const goalLabel = getCurrentGoalLabel(currentServers, nextMilestone);
+
+        // Special styling for verification milestone
+        if (currentServers < VERIFICATION_GOAL) {
+          banner.innerHTML = `
+            <div class="countdown-banner">
+              <div class="countdown-label">Servers to Verification</div>
+              <div class="countdown-number">${serversNeeded}</div>
+              <div class="countdown-sublabel">
+                ${currentServers} / ${VERIFICATION_GOAL} servers
+              </div>
+            </div>
+          `;
+        } else if (currentServers >= VERIFICATION_GOAL && currentServers < 82) {
+          // Between verification and first goal
+          banner.innerHTML = `
+            <div class="countdown-banner" style="background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);">
+              <div class="countdown-label">✅ Verified! Next: ${goalLabel}</div>
+              <div class="countdown-number">${serversNeeded}</div>
+              <div class="countdown-sublabel">
+                ${currentServers} / ${nextMilestone} servers
+              </div>
+            </div>
+          `;
+        } else {
+          // All other milestones
+          banner.innerHTML = `
+            <div class="countdown-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+              <div class="countdown-label">Next Milestone: ${goalLabel}</div>
+              <div class="countdown-number">${serversNeeded}</div>
+              <div class="countdown-sublabel">
+                ${currentServers} / ${nextMilestone} servers
+              </div>
+            </div>
+          `;
+        }
+
+        banner.style.display = "block";
+      }
+
+      function updateProjectedDate(currentServers, growthRate) {
+        const section = document.getElementById("projection-section");
+        if (!section) return;
+
+        const nextMilestone = getNextMilestone(currentServers);
+        const goalLabel = getCurrentGoalLabel(currentServers, nextMilestone);
+        const serversNeeded = nextMilestone - currentServers;
+
+        if (!growthRate || growthRate <= 0) {
+          section.innerHTML = `
+            <div class="projection-section">
+              <div class="projection-title">📅 Projected ${goalLabel} Date</div>
+              <div class="projection-date">Calculating...</div>
+              <div class="projection-details">
+                Need more data to estimate arrival date
+              </div>
+            </div>
+          `;
+          section.style.display = "block";
+          return;
+        }
+
+        const hoursNeeded = serversNeeded / growthRate;
+        const projectedDate = new Date(
+          Date.now() + hoursNeeded * 60 * 60 * 1000
+        );
+
+        const formattedDate = formatDateWithOrdinal(projectedDate);
+
+        // Format time away more precisely
+        let timeAwayText;
+        if (hoursNeeded < 1) {
+          const minutesAway = Math.ceil(hoursNeeded * 60);
+          timeAwayText = `${minutesAway} minute${minutesAway !== 1 ? "s" : ""}`;
+        } else if (hoursNeeded < 24) {
+          const hoursAway = Math.ceil(hoursNeeded);
+          timeAwayText = `${hoursAway} hour${hoursAway !== 1 ? "s" : ""}`;
+        } else {
+          const daysAway = Math.ceil(hoursNeeded / 24);
+          timeAwayText = `${daysAway} day${daysAway !== 1 ? "s" : ""}`;
+        }
+
+        // Debug info
+        console.log("Projection Debug:", {
+          currentTime: new Date().toLocaleString(),
+          serversNeeded,
+          growthRate: growthRate.toFixed(4),
+          hoursNeeded: hoursNeeded.toFixed(2),
+          timeAwayText,
+          projectedDate: projectedDate.toLocaleString(),
+        });
+
+        section.innerHTML = `
+          <div class="projection-section">
+            <div class="projection-title">📅 Projected ${goalLabel} Date</div>
+            <div class="projection-date">${formattedDate}</div>
+            <div class="projection-details">
+              That's approximately ${timeAwayText} away at current growth rate
+            </div>
+          </div>
+        `;
+        section.style.display = "block";
+      }
+
+      function updateDailyTracker(currentServers, growthRate) {
+        const tracker = document.getElementById("daily-tracker");
+        const goalsDiv = document.getElementById("daily-goals");
+        if (!tracker || !goalsDiv) return;
+
+        const nextMilestone = getNextMilestone(currentServers);
+        const goalLabel = getCurrentGoalLabel(currentServers, nextMilestone);
+        const serversNeeded = nextMilestone - currentServers;
+        const serversPerDay = growthRate ? growthRate * 24 : 0;
+
+        // Calculate different timeframe goals
+        const goals = [
+          { label: `To reach ${goalLabel} in 1 day`, value: serversNeeded },
+          {
+            label: `To reach ${goalLabel} in 3 days`,
+            value: Math.ceil(serversNeeded / 3),
+          },
+          {
+            label: `To reach ${goalLabel} in 7 days`,
+            value: Math.ceil(serversNeeded / 7),
+          },
+          {
+            label: "Current daily rate",
+            value: serversPerDay > 0 ? serversPerDay.toFixed(1) : "N/A",
+            highlight: true,
+          },
+        ];
+
+        let html = "";
+        goals.forEach((goal) => {
+          const highlightClass = goal.highlight
+            ? ' style="border-left-color: #f093fb;"'
+            : "";
+          html += `
+            <div class="daily-goal-card"${highlightClass}>
+              <span class="daily-goal-label">${goal.label}</span>
+              <span class="daily-goal-value">${typeof goal.value === "number" ? goal.value.toFixed(1) : goal.value} servers/day</span>
+            </div>
+          `;
+        });
+
+        goalsDiv.innerHTML = html;
+        tracker.style.display = "block";
+      }
+
+      function updateRecordsSection() {
+        const section = document.getElementById("records-section");
+        const grid = document.getElementById("records-grid");
+        if (!section || !grid) return;
+
+        const records = getRecords();
+
+        grid.innerHTML = `
+          <div class="record-card">
+            <div class="record-icon">⚡</div>
+            <div class="record-value">+${records.bestHour || 0}</div>
+            <div class="record-label">Best Hour</div>
+          </div>
+          <div class="record-card">
+            <div class="record-icon">🌟</div>
+            <div class="record-value">+${records.bestDay || 0}</div>
+            <div class="record-label">Best Day</div>
+          </div>
+          <div class="record-card">
+            <div class="record-icon">🔥</div>
+            <div class="record-value">${records.longestStreak || 0}</div>
+            <div class="record-label">Longest Streak</div>
+          </div>
+        `;
+
+        section.style.display = "block";
+      }
+
+      function updateRetentionSection() {
+        const section = document.getElementById("retention-section");
+        const percentage = document.getElementById("retention-percentage");
+        const details = document.getElementById("retention-details");
+        if (!section || !percentage || !details) return;
+
+        const retention = getRetentionRate();
+
+        if (!retention) {
+          section.style.display = "none";
+          return;
+        }
+
+        percentage.textContent = `${retention.rate.toFixed(1)}%`;
+
+        details.innerHTML = `
+          <div class="retention-stat">
+            <div class="retention-stat-value">+${retention.gains}</div>
+            <div class="retention-stat-label">Servers Gained</div>
+          </div>
+          <div class="retention-stat">
+            <div class="retention-stat-value">-${retention.losses}</div>
+            <div class="retention-stat-label">Servers Lost</div>
+          </div>
+          <div class="retention-stat">
+            <div class="retention-stat-value">${retention.net > 0 ? "+" : ""}${retention.net}</div>
+            <div class="retention-stat-label">Net Growth</div>
+          </div>
+        `;
+
+        section.style.display = "block";
+      }
+
+      function updatePeakHoursSection() {
+        const section = document.getElementById("peak-hours-section");
+        const content = document.getElementById("peak-hours-content");
+        if (!section || !content) return;
+
+        const peakHours = getPeakHours();
+
+        if (!peakHours) {
+          section.style.display = "none";
+          return;
+        }
+
+        const formatHour = (hour) => {
+          const period = hour >= 12 ? "PM" : "AM";
+          const displayHour = hour % 12 || 12;
+          return `${displayHour}:00 ${period}`;
+        };
+
+        content.innerHTML = `
+          <div class="peak-hour-card best">
+            <div>
+              <div style="font-weight: bold; color: #22c55e;">🌟 Best Hour</div>
+              <div style="color: #666; font-size: 0.9em; margin-top: 5px;">${formatHour(peakHours.best.hour)}</div>
+            </div>
+            <div style="font-size: 1.5em; font-weight: bold; color: #22c55e;">
+              ${peakHours.best.average > 0 ? "+" : ""}${peakHours.best.average.toFixed(2)}
+            </div>
+          </div>
+          <div class="peak-hour-card worst">
+            <div>
+              <div style="font-weight: bold; color: #f87171;">📉 Slowest Hour</div>
+              <div style="color: #666; font-size: 0.9em; margin-top: 5px;">${formatHour(peakHours.worst.hour)}</div>
+            </div>
+            <div style="font-size: 1.5em; font-weight: bold; color: #f87171;">
+              ${peakHours.worst.average > 0 ? "+" : ""}${peakHours.worst.average.toFixed(2)}
+            </div>
+          </div>
+        `;
+
+        section.style.display = "block";
+      }
+
+      function renderChart() {
+        const historical = getHistoricalData();
+        if (historical.length < 2) return;
+
+        const ctx = document.getElementById("growth-chart");
+        if (!ctx) return;
+
+        if (growthChart) {
+          growthChart.destroy();
+        }
+
+        growthChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: historical.map((d) =>
+              new Date(d.timestamp).toLocaleTimeString("en-US", {
+                hour12: false,
+              })
+            ),
+            datasets: [
+              {
+                label: "Servers",
+                data: historical.map((d) => d.servers),
+                borderColor: "#667eea",
+                backgroundColor: "rgba(102, 126, 234, 0.1)",
+                tension: 0.4,
+                fill: true,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
+            scales: {
+              y: {
+                beginAtZero: false,
+                ticks: {
+                  precision: 0,
+                },
+              },
+            },
+          },
+        });
+      }
+
+      function createConfetti() {
+        const colors = [
+          "#ffd700",
+          "#ff6b6b",
+          "#4ecdc4",
+          "#95e1d3",
+          "#f38181",
+          "#aa96da",
+          "#fcbad3",
+        ];
+        const confettiCount = 150;
+
+        for (let i = 0; i < confettiCount; i++) {
+          setTimeout(() => {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.left = Math.random() * 100 + "%";
+            confetti.style.background =
+              colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+            confetti.style.animationDelay = Math.random() * 0.5 + "s";
+            document.body.appendChild(confetti);
+
+            setTimeout(() => confetti.remove(), 5000);
+          }, i * 10);
+        }
+      }
+
+      function showChangeIndicator(change, isIncrease) {
+        const container = document.querySelector(".stat-card");
+        const indicator = document.createElement("div");
+        indicator.className = "change-indicator";
+        indicator.textContent = isIncrease ? `+${change}` : `-${change}`;
+        indicator.style.color = isIncrease ? "#4ade80" : "#f87171";
+        indicator.style.left = "50%";
+        indicator.style.top = "50%";
+        indicator.style.transform = "translateX(-50%)";
+        container.appendChild(indicator);
+
+        setTimeout(() => indicator.remove(), 1000);
+      }
+
+      async function loadStats() {
+        const container = document.getElementById("stats-container");
+
+        try {
+          const response = await fetch(`${DASHBOARD_URL}/api/stats`, {
+            headers: {
+              "ngrok-skip-browser-warning": "true",
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+
+          const stats = await response.json();
+          const currentServerCount = stats.servers;
+
+          // Save historical data
+          saveHistoricalData(currentServerCount);
+
+          // Track initial server count on first load and save to localStorage
+          // If you want to reset the baseline, run: localStorage.setItem('initialServerCount', '70')
+          if (initialServerCount === null || isNaN(initialServerCount)) {
+            initialServerCount = currentServerCount;
+            localStorage.setItem(
+              "initialServerCount",
+              currentServerCount.toString()
+            );
+          }
+
+          // Debug: log the values to console
+          const newServersDebug =
+            initialServerCount !== null
+              ? currentServerCount - initialServerCount
+              : 0;
+          console.log(
+            "Current:",
+            currentServerCount,
+            "Initial:",
+            initialServerCount,
+            "New:",
+            newServersDebug,
+            "IsNegative:",
+            newServersDebug < 0
+          );
+
+          // Check for changes
+          if (previousServerCount !== null) {
+            const change = Math.abs(currentServerCount - previousServerCount);
+            if (change > 0) {
+              const isIncrease = currentServerCount > previousServerCount;
+              showChangeIndicator(change, isIncrease);
+
+              // Add animation class
+              const valueElement = document.querySelector(".stat-value");
+              if (valueElement) {
+                valueElement.classList.remove("increase", "decrease");
+                setTimeout(() => {
+                  valueElement.classList.add(
+                    isIncrease ? "increase" : "decrease"
+                  );
+                  setTimeout(() => {
+                    valueElement.classList.remove("increase", "decrease");
+                  }, 500);
+                }, 10);
+              }
+            }
+          }
+
+          // Track when we first reach 75 servers
+          if (serversAt75 === null && currentServerCount >= 75) {
+            serversAt75 = currentServerCount;
+          }
+
+          // Check for confetti trigger: after verification, trigger on each increase
+          if (
+            previousServerCount !== null &&
+            currentServerCount >= 75 &&
+            currentServerCount > previousServerCount
+          ) {
+            createConfetti();
+          }
+
+          previousServerCount = currentServerCount;
+
+          // Calculate new servers since page load - always show indicator
+          let newServersIndicator = "";
+          if (initialServerCount !== null && !isNaN(initialServerCount)) {
+            const newServers = currentServerCount - initialServerCount;
+            const isNegative = newServers < 0;
+            const absNewServers = Math.abs(newServers);
+
+            console.log("Indicator calculation:", {
+              currentServerCount,
+              initialServerCount,
+              newServers,
+              isNegative,
+              absNewServers,
+            });
+
+            if (currentServerCount >= 1000) {
+              newServersIndicator = `<div class="${isNegative ? "new-servers-indicator negative" : "new-servers-indicator"}">🎉 ${formatNumber(newServers)} servers added! Goal reached!</div>`;
+            } else if (currentServerCount >= 75) {
+              if (isNegative) {
+                // Negative case - show in red
+                newServersIndicator = `<div class="new-servers-indicator negative">-${formatNumber(absNewServers)} new servers since page load</div>`;
+              } else if (newServers > 0) {
+                newServersIndicator = `<div class="new-servers-indicator">+${formatNumber(newServers)} new servers since page load</div>`;
+              } else {
+                newServersIndicator = `<div class="new-servers-indicator" style="opacity: 0.7;">0 new servers</div>`;
+              }
+            } else if (newServers > 0) {
+              newServersIndicator = `<div class="new-servers-indicator">+${formatNumber(newServers)} new servers</div>`;
+            } else if (newServers < 0) {
+              // Negative case - show in red
+              newServersIndicator = `<div class="new-servers-indicator negative">-${formatNumber(absNewServers)} new servers</div>`;
+            } else {
+              newServersIndicator = `<div class="new-servers-indicator" style="opacity: 0.7;">0 new servers</div>`;
+            }
+          } else {
+            // Show indicator even on first load
+            newServersIndicator = `<div class="new-servers-indicator" style="opacity: 0.7;">0 new servers</div>`;
+          }
+
+          container.innerHTML = `
+            <div class="stat-card">
+              <div class="stat-label">Servers</div>
+              <div class="stat-value" id="server-count">${formatNumber(currentServerCount)}</div>
+              ${newServersIndicator}
+            </div>
+          `;
+
+          // Update progress bar
+          const progressSection = document.getElementById("progress-section");
+          const progressBar = document.getElementById("progress-bar");
+          const progressText = document.getElementById("progress-text");
+          const progressPercentage = document.getElementById(
+            "progress-percentage"
+          );
+          const progressGoalLabel = document.getElementById(
+            "progress-goal-label"
+          );
+
+          if (progressSection && progressBar) {
+            progressSection.style.display = "block";
+            const nextMilestone = getNextMilestone(currentServerCount);
+            const goalLabel = getCurrentGoalLabel(
+              currentServerCount,
+              nextMilestone
+            );
+
+            // Calculate progress to next milestone
+            const previousMilestone =
+              MILESTONES.filter((m) => m <= currentServerCount).pop() || 0;
+            const progressRange = nextMilestone - previousMilestone;
+            const progressMade = currentServerCount - previousMilestone;
+            const progress = Math.min(
+              (progressMade / progressRange) * 100,
+              100
+            );
+
+            progressBar.style.width = `${progress}%`;
+            progressPercentage.textContent = `${Math.round(progress)}%`;
+            progressText.textContent = `${currentServerCount}/${nextMilestone}`;
+            progressGoalLabel.textContent = `Progress to ${goalLabel}`;
+
+            // Update milestones
+            [50, 75, 82, 100].forEach((milestone) => {
+              const el = document.getElementById(`milestone-${milestone}`);
+              if (el && currentServerCount >= milestone) {
+                el.classList.add("reached");
+              }
+            });
+          }
+
+          // Calculate growth rate (needed for multiple sections)
+          const growthRate = calculateGrowthRate();
+
+          // Update growth stats
+          const growthStatsSection = document.getElementById("growth-stats");
+          if (growthStatsSection) {
+            growthStatsSection.style.display = "block";
+
+            document.getElementById("servers-per-hour").textContent =
+              growthRate !== null
+                ? `📈 ${growthRate.toFixed(2)}/hr`
+                : "📊 Calculating...";
+
+            // Update time to goal based on current progress
+            const nextMilestone = getNextMilestone(currentServerCount);
+            const goalLabel = getCurrentGoalLabel(
+              currentServerCount,
+              nextMilestone
+            );
+            document.getElementById("time-to-goal-label").textContent =
+              `Estimated Time to ${goalLabel}`;
+            document.getElementById("time-to-goal").textContent =
+              estimateTimeToGoal(currentServerCount, growthRate, nextMilestone);
+
+            const trendElement = document.getElementById("growth-trend");
+            const velocity = getGrowthVelocity();
+
+            if (velocity) {
+              trendElement.innerHTML = `
+                ${getGrowthTrend()}
+                <span class="velocity-indicator velocity-${velocity.type}">
+                  <span class="velocity-arrow">${velocity.arrow}</span>
+                  ${velocity.type === "steady" ? "Steady" : velocity.type === "accelerating" ? "Speeding up" : "Slowing down"}
+                </span>
+              `;
+            } else {
+              trendElement.textContent = getGrowthTrend();
+            }
+          }
+
+          // Update additional stats
+          const additionalStats = document.getElementById("additional-stats");
+          if (additionalStats) {
+            additionalStats.style.display = "grid";
+            document.getElementById("total-users").textContent = formatNumber(
+              stats.users || 0
+            );
+            document.getElementById("uptime").textContent = formatUptime(
+              stats.uptime || 0
+            );
+            document.getElementById("memory").textContent =
+              `${stats.memory || 0} MB`;
+            document.getElementById("ping").textContent =
+              `${stats.ping || 0}ms`;
+          }
+
+          // Update new sections
+          updateCountdownBanner(currentServerCount);
+          updateProjectedDate(currentServerCount, growthRate);
+          updateDailyTracker(currentServerCount, growthRate);
+          updateRecordsSection();
+          updateRetentionSection();
+          updatePeakHoursSection();
+
+          // Render chart
+          const chartContainer = document.getElementById("chart-container");
+          if (chartContainer && getHistoricalData().length >= 2) {
+            chartContainer.style.display = "block";
+            renderChart();
+          }
+
+          document.getElementById("last-updated").textContent =
+            `Last updated: ${new Date().toLocaleTimeString("en-US", { hour12: false })}`;
+        } catch (error) {
+          container.innerHTML = `
+            <div class="error">
+              <strong>Error loading stats:</strong><br>
+              ${error.message}
+            </div>
+          `;
+        }
+      }
+
+      // Load stats on page load
+      loadStats();
+
+      // Auto-refresh every 1 minute
+      setInterval(loadStats, 60000);
+    </script>
+  </body>
+</html>

@@ -72,8 +72,8 @@
       }
 
       .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
+        max-width: 100%;
+        margin: 0;
         padding: 20px 40px;
         display: flex;
         justify-content: space-between;
@@ -1443,37 +1443,14 @@
             </p>
           </div>
 
-          <!-- Support Terms -->
-          <div
-            style="
-              margin-top: 30px;
-              padding: 20px;
-              background: rgba(248, 113, 113, 0.1);
-              border-radius: 12px;
-              border-left: 3px solid #f87171;
-            "
-          >
-            <h5
-              style="color: var(--text); margin-bottom: 12px; font-size: 1.1em"
-            >
-              ⚠️ Support Policy
-            </h5>
-            <p
-              style="
-                color: var(--text-light);
-                font-size: 0.9em;
-                line-height: 1.6;
-                margin: 0;
-              "
-            >
-              Post-launch support is included for the code I deliver. However,
-              <strong style="color: var(--text)"
-                >if you or another developer make significant modifications to
-                the code</strong
-              >, I will no longer be able to provide support for issues that
-              arise. Minor configuration changes are fine, but major code
-              changes void the support agreement.
-            </p>
+          <!-- Policy Links -->
+          <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <a href="hiring-policy.html" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 25px; background: rgba(102, 126, 234, 0.2); color: var(--primary); text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; border: 2px solid rgba(102, 126, 234, 0.3);">
+              <i class="fas fa-file-contract"></i> View Hiring Policy
+            </a>
+            <a href="support-policy.html" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 25px; background: rgba(248, 113, 113, 0.1); color: #f87171; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; border: 2px solid rgba(248, 113, 113, 0.3);">
+              <i class="fas fa-life-ring"></i> View Support Policy
+            </a>
           </div>
         </div>
       </div>
@@ -1737,27 +1714,34 @@
         updateDiscordStatus();
         setInterval(updateDiscordStatus, 30000);
 
-        // Live Bot Stats - Fetch from your bot's API or use placeholder
+        // Live Bot Stats - Fetch from Nexus Bot API
         async function updateBotStats() {
           try {
-            // Replace with your actual bot stats API endpoint
-            // For now, using placeholder data
-            const stats = {
-              servers: 17,
-              users: 356,
-              threats: 42,
-              commands: 1247
-            };
+            const response = await fetch('https://regular-puma-clearly.ngrok-free.app/api/v2/stats', {
+              headers: {
+                'ngrok-skip-browser-warning': 'true'
+              }
+            });
+            const result = await response.json();
             
-            // Animate counters
-            animateCounter('live-servers', stats.servers);
-            animateCounter('live-users', stats.users);
-            animateCounter('live-threats', stats.threats);
-            animateCounter('live-commands', stats.commands);
-            
-            document.getElementById('stats-last-updated').textContent = new Date().toLocaleTimeString();
+            if (result.success && result.data) {
+              const data = result.data;
+              
+              // Animate counters with real data
+              animateCounter('live-servers', data.serverCount || 0);
+              animateCounter('live-users', data.userCount || 0);
+              animateCounter('live-threats', data.threatsDetected || 0);
+              animateCounter('live-commands', data.commandsRun || 0);
+              
+              document.getElementById('stats-last-updated').textContent = new Date().toLocaleTimeString();
+            }
           } catch (error) {
             console.error('Failed to fetch bot stats:', error);
+            // Fallback to placeholder if API fails
+            animateCounter('live-servers', 93);
+            animateCounter('live-users', 1335);
+            animateCounter('live-threats', 3);
+            animateCounter('live-commands', 464);
           }
         }
 

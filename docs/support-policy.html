@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support Policy - Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #667eea;
+        --secondary: #764ba2;
+        --dark: #0f0f1e;
+        --bg-dark: #1a1a2e;
+        --bg-card: #252540;
+        --text: #e0e0e0;
+        --text-light: #b0b0b0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        line-height: 1.6;
+        color: var(--text);
+        background: var(--dark);
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: var(--bg-card);
+        padding: 50px 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--primary);
+        text-decoration: none;
+        margin-bottom: 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .back-link:hover {
+        transform: translateX(-5px);
+      }
+
+      h1 {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .last-updated {
+        color: var(--text-light);
+        font-size: 0.9em;
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        color: var(--text);
+        margin-top: 40px;
+        margin-bottom: 20px;
+        font-size: 1.8em;
+      }
+
+      h3 {
+        color: var(--text);
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-size: 1.3em;
+      }
+
+      p {
+        color: var(--text-light);
+        margin-bottom: 20px;
+        line-height: 1.8;
+      }
+
+      ul,
+      ol {
+        margin-left: 30px;
+        margin-bottom: 20px;
+        color: var(--text-light);
+      }
+
+      li {
+        margin-bottom: 10px;
+        line-height: 1.8;
+      }
+
+      .important-notice {
+        background: rgba(102, 126, 234, 0.15);
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+        margin: 30px 0;
+      }
+
+      .important-notice h3 {
+        margin-top: 0;
+        color: var(--primary);
+      }
+
+      .warning-notice {
+        background: rgba(248, 113, 113, 0.1);
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 4px solid #f87171;
+        margin: 30px 0;
+      }
+
+      .warning-notice h3 {
+        margin-top: 0;
+        color: #f87171;
+      }
+
+      .success-notice {
+        background: rgba(74, 222, 128, 0.1);
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 4px solid #4ade80;
+        margin: 30px 0;
+      }
+
+      .success-notice h3 {
+        margin-top: 0;
+        color: #4ade80;
+      }
+
+      strong {
+        color: var(--text);
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: var(--bg-dark);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      th {
+        background: rgba(102, 126, 234, 0.2);
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      td {
+        color: var(--text-light);
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="index.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+      </a>
+
+      <h1>Support Policy</h1>
+      <p class="last-updated">Last Updated: December 27, 2024</p>
+
+      <div class="warning-notice">
+        <h3>⚠️ Critical: Code Modification Policy</h3>
+        <p style="margin: 0">
+          Post-launch support is included for the code I deliver. However,
+          <strong
+            >if you or another developer make significant modifications to the
+            code</strong
+          >, I will no longer be able to provide support for issues that arise.
+          Minor configuration changes are fine, but major code changes void the
+          support agreement.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>1. What's Covered Under Support</h2>
+
+        <h3>✅ Supported Issues:</h3>
+        <ul>
+          <li>
+            <strong>Bugs in original code</strong> - Any defects in the code I
+            delivered
+          </li>
+          <li>
+            <strong>Setup assistance</strong> - Help getting the project running
+            initially
+          </li>
+          <li>
+            <strong>Configuration questions</strong> - How to adjust settings I
+            built
+          </li>
+          <li>
+            <strong>Documentation clarification</strong> - Explaining how
+            features work
+          </li>
+          <li>
+            <strong>Minor tweaks</strong> - Small adjustments within 2 weeks of
+            delivery
+          </li>
+          <li>
+            <strong>Hosting guidance</strong> - Help with deployment (if
+            included in project)
+          </li>
+        </ul>
+
+        <h3>❌ Not Covered:</h3>
+        <ul>
+          <li>Issues caused by modifications made by you or others</li>
+          <li>Problems with third-party services or APIs</li>
+          <li>Server/hosting issues (unless I'm hosting for you)</li>
+          <li>Feature additions or major changes (quoted separately)</li>
+          <li>Issues caused by incorrect usage or configuration</li>
+          <li>
+            Problems arising from outdated dependencies (after support period)
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>2. Support Duration</h2>
+
+        <table>
+          <tr>
+            <th>Support Type</th>
+            <th>Duration</th>
+            <th>Details</th>
+          </tr>
+          <tr>
+            <td><strong>Bug Fixes</strong></td>
+            <td>Lifetime</td>
+            <td>Bugs in my original code are fixed free forever</td>
+          </tr>
+          <tr>
+            <td><strong>Minor Tweaks</strong></td>
+            <td>2 weeks</td>
+            <td>Small adjustments included for 2 weeks after delivery</td>
+          </tr>
+          <tr>
+            <td><strong>General Support</strong></td>
+            <td>30 days</td>
+            <td>Questions and assistance for 30 days post-delivery</td>
+          </tr>
+          <tr>
+            <td><strong>Extended Support</strong></td>
+            <td>Custom</td>
+            <td>Available for purchase as ongoing maintenance</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="section">
+        <h2>3. What Voids Support</h2>
+
+        <div class="warning-notice">
+          <h3>🚫 Support is Voided If:</h3>
+          <ul style="margin: 15px 0 0 20px">
+            <li>You modify the core functionality of the code</li>
+            <li>Another developer makes significant changes</li>
+            <li>You remove or alter critical components</li>
+            <li>You integrate incompatible third-party code</li>
+            <li>You fail to follow setup/usage instructions</li>
+          </ul>
+        </div>
+
+        <div class="success-notice">
+          <h3>✅ Support Remains Valid For:</h3>
+          <ul style="margin: 15px 0 0 20px">
+            <li>Changing configuration values (API keys, settings, etc.)</li>
+            <li>Adding content (text, images, data)</li>
+            <li>Adjusting CSS/styling</li>
+            <li>Updating environment variables</li>
+            <li>Minor cosmetic changes</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>4. Response Times</h2>
+        <ul>
+          <li><strong>Critical bugs:</strong> Within 24-48 hours</li>
+          <li><strong>General questions:</strong> Within 24-72 hours</li>
+          <li>
+            <strong>Feature requests:</strong> Quoted separately, no timeline
+            guarantee
+          </li>
+        </ul>
+        <p><em>Response times may vary on weekends and holidays.</em></p>
+      </div>
+
+      <div class="section">
+        <h2>5. How to Request Support</h2>
+        <ol>
+          <li><strong>Email me</strong> at nexusbot0@proton.me</li>
+          <li>
+            <strong>Include:</strong>
+            <ul>
+              <li>Project name and delivery date</li>
+              <li>Detailed description of the issue</li>
+              <li>Steps to reproduce the problem</li>
+              <li>Screenshots or error messages (if applicable)</li>
+              <li>Confirmation that no code modifications were made</li>
+            </ul>
+          </li>
+          <li><strong>Wait for response</strong> within stated timeframe</li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <h2>6. Extended Support & Maintenance</h2>
+        <p>Need ongoing support beyond the standard period?</p>
+
+        <h3>Monthly Maintenance Plans:</h3>
+        <ul>
+          <li>
+            <strong>Basic:</strong> $25/month - Bug fixes and minor updates
+          </li>
+          <li>
+            <strong>Standard:</strong> $50/month - Includes small feature
+            additions
+          </li>
+          <li>
+            <strong>Premium:</strong> $100/month - Priority support + regular
+            updates
+          </li>
+        </ul>
+        <p>Custom plans available for larger projects.</p>
+      </div>
+
+      <div class="section">
+        <h2>7. Warranty Disclaimer</h2>
+        <p>While I strive for perfection, please note:</p>
+        <ul>
+          <li>Code is provided "as-is" after the support period</li>
+          <li>I'm not liable for data loss or business interruption</li>
+          <li>Third-party service outages are beyond my control</li>
+          <li>You're responsible for maintaining backups</li>
+        </ul>
+      </div>
+
+      <div class="important-notice">
+        <h3>💡 Pro Tip: Maintain Your Code</h3>
+        <p style="margin: 0">
+          To keep support valid and your project running smoothly: Don't modify
+          core code, keep dependencies updated (carefully), maintain backups,
+          and document any changes you make. If you need modifications, contact
+          me first!
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>8. Dispute Resolution</h2>
+        <p>If you're unsure whether an issue is covered:</p>
+        <ol>
+          <li>Contact me with details</li>
+          <li>I'll assess if it's covered under support</li>
+          <li>If not covered, I'll provide a quote for the work</li>
+          <li>You decide whether to proceed</li>
+        </ol>
+        <p>I'm always fair and reasonable - communication is key!</p>
+      </div>
+
+      <p
+        style="
+          text-align: center;
+          margin-top: 40px;
+          color: var(--text-light);
+          font-size: 0.9em;
+        "
+      >
+        <a
+          href="hiring-policy.html"
+          style="color: var(--primary); text-decoration: none"
+          >View Hiring Policy</a
+        >
+        |
+        <a
+          href="index.html"
+          style="color: var(--primary); text-decoration: none"
+          >Back to Portfolio</a
+        >
+      </p>
+    </div>
+  </body>
+</html>

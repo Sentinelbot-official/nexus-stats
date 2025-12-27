@@ -725,7 +725,7 @@
       <p class="section-subtitle">Get to know me better</p>
       <div class="about-content">
         <div class="about-image">
-          <img src="https://via.placeholder.com/300" alt="Profile Picture" />
+          <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Profile Picture" id="profile-picture" />
         </div>
         <div class="about-text">
           <h3>Hello! I'm a passionate developer.</h3>
@@ -812,7 +812,7 @@
             </div>
             <div class="project-links">
               <a
-                href="https://nexusbot-official.github.io/nexus/"
+                href="https://sentinelbot-official.github.io/Sentinel/index.html"
                 target="_blank"
                 ><i class="fas fa-external-link-alt"></i> Website</a
               >
@@ -889,6 +889,15 @@
             const statusIndicator = document.getElementById("status-indicator");
             const username = document.getElementById("discord-username");
             const activity = document.getElementById("discord-activity");
+            const profilePicture = document.getElementById("profile-picture");
+
+            // Update profile picture
+            const avatarHash = user.discord_user.avatar;
+            const userId = user.discord_user.id;
+            if (avatarHash) {
+              const extension = avatarHash.startsWith("a_") ? "gif" : "png";
+              profilePicture.src = `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.${extension}?size=512`;
+            }
 
             // Update username
             username.textContent = user.discord_user.username;
@@ -932,9 +941,19 @@
           }
         } catch (error) {
           console.error("Failed to fetch Discord status:", error);
-          document.getElementById("discord-username").textContent = "Discord";
-          document.getElementById("discord-activity").textContent =
-            "Status unavailable";
+          const username = document.getElementById("discord-username");
+          const activity = document.getElementById("discord-activity");
+          const profilePicture = document.getElementById("profile-picture");
+          
+          // Set fallback values
+          if (username) username.textContent = "Discord";
+          if (activity) activity.textContent = "Join Lanyard server to enable live status";
+          
+          // Try to set profile picture directly from Discord API as fallback
+          if (profilePicture && profilePicture.src.includes('embed/avatars')) {
+            // Keep the default Discord avatar if Lanyard fails
+            console.log("Using default Discord avatar. Join https://discord.gg/lanyard to enable live status.");
+          }
         }
       }
 

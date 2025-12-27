@@ -31,6 +31,140 @@
         scroll-behavior: smooth;
       }
 
+      /* Loading Screen */
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+      }
+
+      #loading-screen.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .loader {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(102, 126, 234, 0.3);
+        border-top-color: var(--primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      /* Scroll Progress Bar */
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        width: 0%;
+        z-index: 9998;
+        transition: width 0.1s ease;
+      }
+
+      /* Back to Top Button */
+      #back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.5em;
+        cursor: pointer;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      #back-to-top.visible {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      #back-to-top:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--bg-dark);
+        z-index: 9999;
+        transition: left 0.3s ease;
+        padding: 80px 40px;
+      }
+
+      .mobile-menu-overlay.active {
+        left: 0;
+      }
+
+      .mobile-menu-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 2em;
+        color: white;
+        cursor: pointer;
+      }
+
+      .mobile-menu-links {
+        list-style: none;
+        padding: 0;
+      }
+
+      .mobile-menu-links li {
+        margin-bottom: 30px;
+      }
+
+      .mobile-menu-links a {
+        color: white;
+        font-size: 1.5em;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      /* Progress Bar for Skills */
+      .skill-progress {
+        background: rgba(102, 126, 234, 0.1);
+        border-radius: 10px;
+        height: 12px;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+
+      .skill-progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        border-radius: 10px;
+        transition: width 1.5s ease;
+        width: 0%;
+      }
+
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -606,6 +740,31 @@
           display: none;
         }
 
+        #project-timeline .timeline-line {
+          left: 30px !important;
+        }
+
+        #project-timeline > div > div > div > div {
+          flex-direction: column !important;
+          text-align: left !important;
+        }
+
+        #project-timeline > div > div > div > div > div:first-child {
+          text-align: left !important;
+          padding-right: 0 !important;
+          padding-left: 80px !important;
+          padding-bottom: 20px;
+        }
+
+        #project-timeline > div > div > div > div > div:nth-child(2) {
+          position: absolute !important;
+          left: 0 !important;
+        }
+
+        #project-timeline > div > div > div > div > div:last-child {
+          padding-left: 80px !important;
+        }
+
         .mobile-menu {
           display: block;
         }
@@ -650,6 +809,35 @@
     </style>
   </head>
   <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+      <div class="loader"></div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu">
+      <div class="mobile-menu-close" id="mobile-menu-close">
+        <i class="fas fa-times"></i>
+      </div>
+      <ul class="mobile-menu-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#hire">Hire Me</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
     <!-- Navigation -->
     <nav id="navbar">
       <div class="nav-container">
@@ -790,31 +978,49 @@
           <div class="skill-icon"><i class="fab fa-html5"></i></div>
           <h3>Frontend Development</h3>
           <p>HTML5, CSS3, JavaScript, React, Vue.js, Tailwind CSS</p>
+          <div class="skill-progress">
+            <div class="skill-progress-fill" data-progress="90"></div>
+          </div>
         </div>
         <div class="skill-card fade-in">
           <div class="skill-icon"><i class="fas fa-server"></i></div>
           <h3>Backend Development</h3>
           <p>Node.js, Express, Python, Django, REST APIs</p>
+          <div class="skill-progress">
+            <div class="skill-progress-fill" data-progress="85"></div>
+          </div>
         </div>
         <div class="skill-card fade-in">
           <div class="skill-icon"><i class="fas fa-database"></i></div>
           <h3>Database Management</h3>
           <p>MongoDB, PostgreSQL, MySQL, Redis</p>
+          <div class="skill-progress">
+            <div class="skill-progress-fill" data-progress="80"></div>
+          </div>
         </div>
         <div class="skill-card fade-in">
           <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
           <h3>DevOps & Tools</h3>
           <p>Git, Docker, CI/CD, AWS, Linux</p>
+          <div class="skill-progress">
+            <div class="skill-progress-fill" data-progress="75"></div>
+          </div>
         </div>
         <div class="skill-card fade-in">
           <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
           <h3>Mobile Development</h3>
           <p>React Native, Flutter, Progressive Web Apps</p>
+          <div class="skill-progress">
+            <div class="skill-progress-fill" data-progress="70"></div>
+          </div>
         </div>
         <div class="skill-card fade-in">
           <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
           <h3>UI/UX Design</h3>
           <p>Figma, Adobe XD, Responsive Design, Accessibility</p>
+          <div class="skill-progress">
+            <div class="skill-progress-fill" data-progress="85"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -2791,6 +2997,81 @@
       </div>
     </section>
 
+    <!-- Project Timeline Visualization -->
+    <section id="project-timeline" style="padding: 80px 20px">
+      <div style="max-width: 1000px; margin: 0 auto">
+        <h2 class="section-title">Project Timeline</h2>
+        <p class="section-subtitle">Typical project lifecycle from start to finish</p>
+        <div style="position: relative; margin-top: 60px">
+          <!-- Timeline Line -->
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 4px; height: 100%; background: linear-gradient(180deg, var(--primary), var(--secondary)); border-radius: 10px"></div>
+          
+          <!-- Timeline Items -->
+          <div style="position: relative">
+            <!-- Week 1 -->
+            <div style="display: flex; align-items: center; margin-bottom: 80px; position: relative">
+              <div style="flex: 1; text-align: right; padding-right: 40px">
+                <h3 style="color: var(--text); font-size: 1.3em; margin-bottom: 10px">Week 1: Discovery</h3>
+                <p style="color: var(--text-light)">Requirements gathering, project planning, and timeline establishment</p>
+              </div>
+              <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; box-shadow: 0 0 20px rgba(102, 126, 234, 0.5)">
+                <i class="fas fa-clipboard-list" style="color: white; font-size: 1.5em"></i>
+              </div>
+              <div style="flex: 1; padding-left: 40px"></div>
+            </div>
+
+            <!-- Week 2 -->
+            <div style="display: flex; align-items: center; margin-bottom: 80px; position: relative">
+              <div style="flex: 1; text-align: right; padding-right: 40px"></div>
+              <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; box-shadow: 0 0 20px rgba(102, 126, 234, 0.5)">
+                <i class="fas fa-pencil-ruler" style="color: white; font-size: 1.5em"></i>
+              </div>
+              <div style="flex: 1; padding-left: 40px">
+                <h3 style="color: var(--text); font-size: 1.3em; margin-bottom: 10px">Week 2: Design</h3>
+                <p style="color: var(--text-light)">UI/UX design, architecture planning, and mockup creation</p>
+              </div>
+            </div>
+
+            <!-- Week 3-4 -->
+            <div style="display: flex; align-items: center; margin-bottom: 80px; position: relative">
+              <div style="flex: 1; text-align: right; padding-right: 40px">
+                <h3 style="color: var(--text); font-size: 1.3em; margin-bottom: 10px">Week 3-4: Development</h3>
+                <p style="color: var(--text-light)">Core functionality implementation, regular progress updates</p>
+              </div>
+              <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; box-shadow: 0 0 20px rgba(102, 126, 234, 0.5)">
+                <i class="fas fa-code" style="color: white; font-size: 1.5em"></i>
+              </div>
+              <div style="flex: 1; padding-left: 40px"></div>
+            </div>
+
+            <!-- Week 5 -->
+            <div style="display: flex; align-items: center; margin-bottom: 80px; position: relative">
+              <div style="flex: 1; text-align: right; padding-right: 40px"></div>
+              <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; box-shadow: 0 0 20px rgba(102, 126, 234, 0.5)">
+                <i class="fas fa-bug" style="color: white; font-size: 1.5em"></i>
+              </div>
+              <div style="flex: 1; padding-left: 40px">
+                <h3 style="color: var(--text); font-size: 1.3em; margin-bottom: 10px">Week 5: Testing</h3>
+                <p style="color: var(--text-light)">Comprehensive testing, bug fixes, and optimization</p>
+              </div>
+            </div>
+
+            <!-- Week 6 -->
+            <div style="display: flex; align-items: center; position: relative">
+              <div style="flex: 1; text-align: right; padding-right: 40px">
+                <h3 style="color: var(--text); font-size: 1.3em; margin-bottom: 10px">Week 6: Deployment</h3>
+                <p style="color: var(--text-light)">Final delivery, deployment, and documentation handoff</p>
+              </div>
+              <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; box-shadow: 0 0 20px rgba(102, 126, 234, 0.5)">
+                <i class="fas fa-rocket" style="color: white; font-size: 1.5em"></i>
+              </div>
+              <div style="flex: 1; padding-left: 40px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FAQ Section -->
     <section id="faq" style="background: var(--bg-dark)">
       <h2 class="section-title">Frequently Asked Questions</h2>
@@ -2965,6 +3246,163 @@
             deposit to start, 50% on delivery. Payment plans available for
             projects over $200.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof Stats -->
+    <section id="social-proof" style="background: var(--bg-dark); padding: 60px 20px">
+      <div style="max-width: 1200px; margin: 0 auto">
+        <h2 class="section-title">Trusted by Developers</h2>
+        <p class="section-subtitle">Join hundreds of satisfied clients</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-top: 50px">
+          <div style="text-align: center">
+            <div style="font-size: 3em; font-weight: bold; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px" class="counter" data-target="150">0</div>
+            <p style="color: var(--text-light); font-size: 1.1em">Projects Completed</p>
+          </div>
+          <div style="text-align: center">
+            <div style="font-size: 3em; font-weight: bold; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px" class="counter" data-target="98">0</div>
+            <p style="color: var(--text-light); font-size: 1.1em">Client Satisfaction %</p>
+          </div>
+          <div style="text-align: center">
+            <div style="font-size: 3em; font-weight: bold; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px" class="counter" data-target="5">0</div>
+            <p style="color: var(--text-light); font-size: 1.1em">Years Experience</p>
+          </div>
+          <div style="text-align: center">
+            <div style="font-size: 3em; font-weight: bold; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px" class="counter" data-target="24">0</div>
+            <p style="color: var(--text-light); font-size: 1.1em">Hours Response Time</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Calculator -->
+    <section id="pricing-calculator" style="padding: 80px 20px">
+      <div style="max-width: 800px; margin: 0 auto">
+        <h2 class="section-title">Project Cost Calculator</h2>
+        <p class="section-subtitle">Get an instant estimate for your project</p>
+        <div style="background: var(--bg-card); padding: 40px; border-radius: 15px; margin-top: 40px">
+          <div style="margin-bottom: 30px">
+            <label style="display: block; margin-bottom: 10px; color: var(--text); font-weight: 600">Project Type</label>
+            <select id="project-type" style="width: 100%; padding: 15px; background: var(--light); color: var(--text); border: 2px solid rgba(102, 126, 234, 0.3); border-radius: 10px; font-size: 1em">
+              <option value="500">Discord Bot - Basic ($500)</option>
+              <option value="1500">Discord Bot - Advanced ($1,500)</option>
+              <option value="800">Website - Portfolio ($800)</option>
+              <option value="2000">Website - E-commerce ($2,000)</option>
+              <option value="2500">Custom Solution ($2,500+)</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 30px">
+            <label style="display: block; margin-bottom: 10px; color: var(--text); font-weight: 600">Additional Features</label>
+            <div style="display: flex; align-items: center; margin-bottom: 15px">
+              <input type="checkbox" id="hosting" value="50" style="margin-right: 10px; width: 20px; height: 20px">
+              <label for="hosting" style="color: var(--text)">Hosting Setup (+$50/month)</label>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 15px">
+              <input type="checkbox" id="maintenance" value="100" style="margin-right: 10px; width: 20px; height: 20px">
+              <label for="maintenance" style="color: var(--text)">Extended Maintenance (+$100/month)</label>
+            </div>
+            <div style="display: flex; align-items: center">
+              <input type="checkbox" id="rush" value="500" style="margin-right: 10px; width: 20px; height: 20px">
+              <label for="rush" style="color: var(--text)">Rush Delivery (+$500)</label>
+            </div>
+          </div>
+          <div style="border-top: 2px solid rgba(102, 126, 234, 0.3); padding-top: 30px">
+            <div style="display: flex; justify-content: space-between; align-items: center">
+              <span style="font-size: 1.5em; color: var(--text); font-weight: 600">Estimated Total:</span>
+              <span id="total-price" style="font-size: 2em; font-weight: bold; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent">$500</span>
+            </div>
+            <p style="color: var(--text-light); margin-top: 15px; font-size: 0.9em">*Final price may vary based on project complexity and requirements</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack with Logos -->
+    <section id="tech-stack" style="background: var(--bg-dark); padding: 80px 20px">
+      <div style="max-width: 1200px; margin: 0 auto">
+        <h2 class="section-title">Tech Stack</h2>
+        <p class="section-subtitle">Technologies & tools I use daily</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 30px; margin-top: 50px">
+          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
+            <i class="fab fa-js" style="font-size: 3em; color: #F7DF1E; margin-bottom: 15px"></i>
+            <p style="color: var(--text); font-weight: 600">JavaScript</p>
+          </div>
+          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
+            <i class="fab fa-python" style="font-size: 3em; color: #3776AB; margin-bottom: 15px"></i>
+            <p style="color: var(--text); font-weight: 600">Python</p>
+          </div>
+          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
+            <i class="fab fa-node-js" style="font-size: 3em; color: #339933; margin-bottom: 15px"></i>
+            <p style="color: var(--text); font-weight: 600">Node.js</p>
+          </div>
+          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
+            <i class="fab fa-react" style="font-size: 3em; color: #61DAFB; margin-bottom: 15px"></i>
+            <p style="color: var(--text); font-weight: 600">React</p>
+          </div>
+          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
+            <i class="fab fa-docker" style="font-size: 3em; color: #2496ED; margin-bottom: 15px"></i>
+            <p style="color: var(--text); font-weight: 600">Docker</p>
+          </div>
+          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
+            <i class="fab fa-git-alt" style="font-size: 3em; color: #F05032; margin-bottom: 15px"></i>
+            <p style="color: var(--text); font-weight: 600">Git</p>
+          </div>
+          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
+            <i class="fab fa-discord" style="font-size: 3em; color: #5865F2; margin-bottom: 15px"></i>
+            <p style="color: var(--text); font-weight: 600">Discord.js</p>
+          </div>
+          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
+            <i class="fas fa-database" style="font-size: 3em; color: #47A248; margin-bottom: 15px"></i>
+            <p style="color: var(--text); font-weight: 600">MongoDB</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Snippet Showcase -->
+    <section id="code-showcase" style="padding: 80px 20px">
+      <div style="max-width: 1200px; margin: 0 auto">
+        <h2 class="section-title">Code Showcase</h2>
+        <p class="section-subtitle">Examples of my clean, efficient code</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 30px; margin-top: 50px">
+          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; border: 2px solid rgba(102, 126, 234, 0.3)">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+              <h3 style="color: var(--text); font-size: 1.2em">Discord Bot Command</h3>
+              <span style="background: rgba(102, 126, 234, 0.2); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.9em">JavaScript</span>
+            </div>
+            <pre style="background: var(--dark); padding: 20px; border-radius: 10px; overflow-x: auto; color: #e0e0e0; font-family: 'Courier New', monospace; font-size: 0.9em; line-height: 1.6"><code>client.on('messageCreate', async (msg) => {
+  if (msg.content === '!stats') {
+    const stats = await getServerStats();
+    const embed = new EmbedBuilder()
+      .setTitle('📊 Server Statistics')
+      .setColor('#667eea')
+      .addFields(
+        { name: 'Members', value: stats.members },
+        { name: 'Online', value: stats.online }
+      );
+    msg.reply({ embeds: [embed] });
+  }
+});</code></pre>
+          </div>
+          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; border: 2px solid rgba(102, 126, 234, 0.3)">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+              <h3 style="color: var(--text); font-size: 1.2em">API Endpoint</h3>
+              <span style="background: rgba(102, 126, 234, 0.2); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.9em">Node.js</span>
+            </div>
+            <pre style="background: var(--dark); padding: 20px; border-radius: 10px; overflow-x: auto; color: #e0e0e0; font-family: 'Courier New', monospace; font-size: 0.9em; line-height: 1.6"><code>app.get('/api/v2/stats', async (req, res) => {
+  try {
+    const stats = {
+      servers: client.guilds.cache.size,
+      users: client.users.cache.size,
+      uptime: process.uptime()
+    };
+    res.json({ success: true, data: stats });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});</code></pre>
+          </div>
         </div>
       </div>
     </section>
@@ -3333,6 +3771,184 @@
     </footer>
 
     <script>
+      // Loading Screen
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          document.getElementById('loading-screen').classList.add('hidden');
+        }, 1000);
+      });
+
+      // Scroll Progress Bar
+      window.addEventListener('scroll', () => {
+        const scrollProgress = document.getElementById('scroll-progress');
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = (scrollTop / scrollHeight) * 100;
+        scrollProgress.style.width = progress + '%';
+      });
+
+      // Back to Top Button
+      const backToTopBtn = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      });
+
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Mobile Menu
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuClose = document.getElementById('mobile-menu-close');
+      
+      // Add mobile menu toggle button functionality
+      document.addEventListener('DOMContentLoaded', () => {
+        const navLinks = document.querySelector('.nav-links');
+        if (navLinks) {
+          const menuToggle = document.createElement('div');
+          menuToggle.className = 'mobile-menu-toggle';
+          menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+          menuToggle.style.cssText = 'display: none; font-size: 1.5em; color: white; cursor: pointer;';
+          document.querySelector('.nav-container').appendChild(menuToggle);
+
+          menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+          });
+
+          // Show toggle on mobile
+          const mediaQuery = window.matchMedia('(max-width: 768px)');
+          const handleMobile = (e) => {
+            if (e.matches) {
+              menuToggle.style.display = 'block';
+            } else {
+              menuToggle.style.display = 'none';
+              mobileMenu.classList.remove('active');
+            }
+          };
+          mediaQuery.addListener(handleMobile);
+          handleMobile(mediaQuery);
+        }
+      });
+
+      mobileMenuClose.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+
+      // Close mobile menu when clicking a link
+      document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('active');
+        });
+      });
+
+      // Skill Progress Bars Animation
+      const animateSkillBars = () => {
+        const skillBars = document.querySelectorAll('.skill-progress-fill');
+        skillBars.forEach(bar => {
+          const progress = bar.getAttribute('data-progress');
+          bar.style.width = progress + '%';
+        });
+      };
+
+      // Trigger skill bars when in view
+      const skillObserverOptions = {
+        threshold: 0.5
+      };
+
+      const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateSkillBars();
+            skillObserver.unobserve(entry.target);
+          }
+        });
+      }, skillObserverOptions);
+
+      const skillsSection = document.getElementById('skills');
+      if (skillsSection) {
+        skillObserver.observe(skillsSection);
+      }
+
+      // Animated Counters for Social Proof
+      function animateCounter(element) {
+        const target = parseInt(element.getAttribute('data-target'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+
+        const updateCounter = () => {
+          current += increment;
+          if (current < target) {
+            element.textContent = Math.floor(current);
+            requestAnimationFrame(updateCounter);
+          } else {
+            element.textContent = target;
+          }
+        };
+
+        updateCounter();
+      }
+
+      // Trigger counters when in view
+      const counterObserverOptions = {
+        threshold: 0.5
+      };
+
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, counterObserverOptions);
+
+      document.querySelectorAll('.counter').forEach(counter => {
+        counterObserver.observe(counter);
+      });
+
+      // Pricing Calculator
+      const projectTypeSelect = document.getElementById('project-type');
+      const hostingCheckbox = document.getElementById('hosting');
+      const maintenanceCheckbox = document.getElementById('maintenance');
+      const rushCheckbox = document.getElementById('rush');
+      const totalPriceElement = document.getElementById('total-price');
+
+      function updatePrice() {
+        let total = parseInt(projectTypeSelect.value);
+        
+        if (hostingCheckbox.checked) {
+          total += parseInt(hostingCheckbox.value);
+        }
+        if (maintenanceCheckbox.checked) {
+          total += parseInt(maintenanceCheckbox.value);
+        }
+        if (rushCheckbox.checked) {
+          total += parseInt(rushCheckbox.value);
+        }
+
+        totalPriceElement.textContent = '$' + total.toLocaleString();
+      }
+
+      projectTypeSelect.addEventListener('change', updatePrice);
+      hostingCheckbox.addEventListener('change', updatePrice);
+      maintenanceCheckbox.addEventListener('change', updatePrice);
+      rushCheckbox.addEventListener('change', updatePrice);
+
+      // Tech Stack Hover Effect
+      document.querySelectorAll('.tech-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-10px)';
+        });
+        item.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+        });
+      });
+
       // Discord Status using Lanyard API
       const DISCORD_ID = "1392165977793368124";
 

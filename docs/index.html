@@ -61,7 +61,9 @@
       }
 
       @keyframes spin {
-        to { transform: rotate(360deg); }
+        to {
+          transform: rotate(360deg);
+        }
       }
 
       /* Scroll Progress Bar */
@@ -163,6 +165,20 @@
         border-radius: 10px;
         transition: width 1.5s ease;
         width: 0%;
+      }
+
+      /* Premade Bot Cards */
+      .premade-bot-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .premade-bot-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      }
+
+      .premade-bot-card button:hover {
+        transform: scale(1.05);
       }
 
       body {
@@ -831,6 +847,7 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
+        <li><a href="#premade-bots">Premade Bots</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#hire">Hire Me</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -846,6 +863,7 @@
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#skills">Skills</a></li>
+          <li><a href="#premade-bots">Premade Bots</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#hire">Hire Me</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -1188,6 +1206,650 @@
       </div>
     </section>
 
+    <!-- Premade Bots Section -->
+    <section
+      id="premade-bots"
+      style="padding: 80px 20px; background: var(--bg-dark)"
+    >
+      <div style="max-width: 1200px; margin: 0 auto">
+        <h2 class="section-title">🤖 Premade Discord Bots</h2>
+        <p class="section-subtitle">
+          Ready-to-use bots, instant delivery, affordable pricing
+        </p>
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+          "
+        >
+          <!-- Moderation Bot -->
+          <div
+            style="
+              background: var(--bg-card);
+              border-radius: 15px;
+              padding: 30px;
+              border: 2px solid rgba(102, 126, 234, 0.3);
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+            "
+            class="premade-bot-card"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 20px;
+              "
+            >
+              <div
+                style="
+                  width: 60px;
+                  height: 60px;
+                  background: linear-gradient(135deg, #667eea, #764ba2);
+                  border-radius: 15px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <i
+                  class="fas fa-shield-alt"
+                  style="font-size: 1.8em; color: white"
+                ></i>
+              </div>
+              <div
+                style="
+                  background: rgba(102, 126, 234, 0.2);
+                  color: var(--primary);
+                  padding: 8px 20px;
+                  border-radius: 20px;
+                  font-weight: bold;
+                "
+              >
+                $79
+              </div>
+            </div>
+            <h3
+              style="color: var(--text); font-size: 1.5em; margin-bottom: 15px"
+            >
+              Moderation Pro
+            </h3>
+            <p
+              style="
+                color: var(--text-light);
+                margin-bottom: 25px;
+                line-height: 1.6;
+              "
+            >
+              Complete moderation solution with auto-mod, warnings, mutes, bans,
+              and detailed logging.
+            </p>
+            <ul style="list-style: none; padding: 0; margin-bottom: 25px">
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Auto-moderation (spam, links, caps)
+              </li>
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Warning system with tracking
+              </li>
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Timed mutes & bans
+              </li>
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Detailed mod logs
+              </li>
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Custom commands
+              </li>
+            </ul>
+            <button
+              style="
+                width: 100%;
+                padding: 15px;
+                background: linear-gradient(
+                  135deg,
+                  var(--primary),
+                  var(--secondary)
+                );
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-size: 1em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+              "
+              onclick="window.location.href='#contact'"
+            >
+              Get Started
+            </button>
+          </div>
+
+          <!-- Ticket System Bot -->
+          <div
+            style="
+              background: var(--bg-card);
+              border-radius: 15px;
+              padding: 30px;
+              border: 2px solid rgba(102, 126, 234, 0.3);
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+            "
+            class="premade-bot-card"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 20px;
+              "
+            >
+              <div
+                style="
+                  width: 60px;
+                  height: 60px;
+                  background: linear-gradient(135deg, #667eea, #764ba2);
+                  border-radius: 15px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <i
+                  class="fas fa-ticket-alt"
+                  style="font-size: 1.8em; color: white"
+                ></i>
+              </div>
+              <div
+                style="
+                  background: rgba(102, 126, 234, 0.2);
+                  color: var(--primary);
+                  padding: 8px 20px;
+                  border-radius: 20px;
+                  font-weight: bold;
+                "
+              >
+                $99
+              </div>
+            </div>
+            <h3
+              style="color: var(--text); font-size: 1.5em; margin-bottom: 15px"
+            >
+              Ticket Master
+            </h3>
+            <p
+              style="
+                color: var(--text-light);
+                margin-bottom: 25px;
+                line-height: 1.6;
+              "
+            >
+              Professional support ticket system with categories, transcripts,
+              and staff management.
+            </p>
+            <ul style="list-style: none; padding: 0; margin-bottom: 25px">
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Button-based ticket creation
+              </li>
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Multiple ticket categories
+              </li>
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Transcript system
+              </li>
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Staff role management
+              </li>
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Claim & close system
+              </li>
+            </ul>
+            <button
+              style="
+                width: 100%;
+                padding: 15px;
+                background: linear-gradient(
+                  135deg,
+                  var(--primary),
+                  var(--secondary)
+                );
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-size: 1em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+              "
+              onclick="window.location.href='#contact'"
+            >
+              Get Started
+            </button>
+          </div>
+
+          <!-- Welcome & Leveling Bot -->
+          <div
+            style="
+              background: var(--bg-card);
+              border-radius: 15px;
+              padding: 30px;
+              border: 2px solid rgba(102, 126, 234, 0.3);
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+            "
+            class="premade-bot-card"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 20px;
+              "
+            >
+              <div
+                style="
+                  width: 60px;
+                  height: 60px;
+                  background: linear-gradient(135deg, #667eea, #764ba2);
+                  border-radius: 15px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <i
+                  class="fas fa-star"
+                  style="font-size: 1.8em; color: white"
+                ></i>
+              </div>
+              <div
+                style="
+                  background: rgba(102, 126, 234, 0.2);
+                  color: var(--primary);
+                  padding: 8px 20px;
+                  border-radius: 20px;
+                  font-weight: bold;
+                "
+              >
+                $89
+              </div>
+            </div>
+            <h3
+              style="color: var(--text); font-size: 1.5em; margin-bottom: 15px"
+            >
+              Level Up
+            </h3>
+            <p
+              style="
+                color: var(--text-light);
+                margin-bottom: 25px;
+                line-height: 1.6;
+              "
+            >
+              Engage your community with XP system, leaderboards, and custom
+              welcome messages.
+            </p>
+            <ul style="list-style: none; padding: 0; margin-bottom: 25px">
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                XP & leveling system
+              </li>
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Leaderboards & rankings
+              </li>
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Custom welcome cards
+              </li>
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Role rewards
+              </li>
+              <li
+                style="
+                  color: var(--text);
+                  margin-bottom: 12px;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <i
+                  class="fas fa-check"
+                  style="color: var(--primary); margin-right: 10px"
+                ></i>
+                Customizable messages
+              </li>
+            </ul>
+            <button
+              style="
+                width: 100%;
+                padding: 15px;
+                background: linear-gradient(
+                  135deg,
+                  var(--primary),
+                  var(--secondary)
+                );
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-size: 1em;
+                font-weight: 600;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+              "
+              onclick="window.location.href='#contact'"
+            >
+              Get Started
+            </button>
+          </div>
+        </div>
+
+        <!-- Premade vs Custom Comparison -->
+        <div
+          style="
+            margin-top: 80px;
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 40px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+          "
+        >
+          <h3
+            style="
+              color: var(--text);
+              font-size: 1.8em;
+              text-align: center;
+              margin-bottom: 40px;
+            "
+          >
+            Premade vs Custom - Which is Right for You?
+          </h3>
+          <div style="overflow-x: auto">
+            <table
+              style="width: 100%; border-collapse: collapse; color: var(--text)"
+            >
+              <thead>
+                <tr style="border-bottom: 2px solid rgba(102, 126, 234, 0.3)">
+                  <th style="padding: 20px; text-align: left; font-size: 1.1em">
+                    Feature
+                  </th>
+                  <th
+                    style="padding: 20px; text-align: center; font-size: 1.1em"
+                  >
+                    Premade Bots
+                  </th>
+                  <th
+                    style="padding: 20px; text-align: center; font-size: 1.1em"
+                  >
+                    Custom Bots
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid rgba(102, 126, 234, 0.2)">
+                  <td style="padding: 20px">💰 Price</td>
+                  <td
+                    style="
+                      padding: 20px;
+                      text-align: center;
+                      color: var(--primary);
+                      font-weight: bold;
+                    "
+                  >
+                    $79 - $149
+                  </td>
+                  <td style="padding: 20px; text-align: center">
+                    $500 - $1,500+
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(102, 126, 234, 0.2)">
+                  <td style="padding: 20px">⚡ Delivery Time</td>
+                  <td
+                    style="
+                      padding: 20px;
+                      text-align: center;
+                      color: var(--primary);
+                      font-weight: bold;
+                    "
+                  >
+                    Instant
+                  </td>
+                  <td style="padding: 20px; text-align: center">4-6 weeks</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(102, 126, 234, 0.2)">
+                  <td style="padding: 20px">🎨 Customization</td>
+                  <td style="padding: 20px; text-align: center">
+                    Limited (colors, text)
+                  </td>
+                  <td
+                    style="
+                      padding: 20px;
+                      text-align: center;
+                      color: var(--primary);
+                      font-weight: bold;
+                    "
+                  >
+                    Fully Custom
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(102, 126, 234, 0.2)">
+                  <td style="padding: 20px">🔧 Features</td>
+                  <td style="padding: 20px; text-align: center">
+                    Pre-defined set
+                  </td>
+                  <td
+                    style="
+                      padding: 20px;
+                      text-align: center;
+                      color: var(--primary);
+                      font-weight: bold;
+                    "
+                  >
+                    Your Requirements
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(102, 126, 234, 0.2)">
+                  <td style="padding: 20px">📚 Support</td>
+                  <td style="padding: 20px; text-align: center">30 days</td>
+                  <td
+                    style="
+                      padding: 20px;
+                      text-align: center;
+                      color: var(--primary);
+                      font-weight: bold;
+                    "
+                  >
+                    90 days
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 20px">🎯 Best For</td>
+                  <td style="padding: 20px; text-align: center">
+                    Small servers, standard needs
+                  </td>
+                  <td
+                    style="
+                      padding: 20px;
+                      text-align: center;
+                      color: var(--primary);
+                      font-weight: bold;
+                    "
+                  >
+                    Large servers, unique needs
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="text-align: center; margin-top: 30px">
+            <p
+              style="
+                color: var(--text-light);
+                font-size: 1.1em;
+                margin-bottom: 20px;
+              "
+            >
+              💡 <strong>Pro Tip:</strong> Start with a premade bot and upgrade
+              to custom features later for $200-$500!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects">
       <h2 class="section-title">Featured Project</h2>
@@ -1392,7 +2054,7 @@
                       margin-bottom: 5px;
                     "
                   >
-                    Starting at $25
+                    $79 - $1,500
                   </div>
                   <p
                     style="
@@ -1421,7 +2083,7 @@
                     "
                   >
                     <span style="color: #4ade80">✓</span>
-                    <span>Simple bot: $25-$75</span>
+                    <span>Premade bots: $79-$149</span>
                   </li>
                   <li
                     style="
@@ -1432,7 +2094,7 @@
                     "
                   >
                     <span style="color: #4ade80">✓</span>
-                    <span>Advanced features: $75-$200</span>
+                    <span>Premade + Custom: $300-$800</span>
                   </li>
                   <li
                     style="
@@ -1443,7 +2105,7 @@
                     "
                   >
                     <span style="color: #4ade80">✓</span>
-                    <span>Complex bot: $200-$400</span>
+                    <span>Fully custom: $500-$1,500+</span>
                   </li>
                   <li
                     style="
@@ -1454,7 +2116,7 @@
                     "
                   >
                     <span style="color: #4ade80">✓</span>
-                    <span>Hosting setup guidance included</span>
+                    <span>Hosting available: +$50/month</span>
                   </li>
                   <li
                     style="
@@ -1524,7 +2186,7 @@
                       margin-bottom: 5px;
                     "
                   >
-                    Starting at $50
+                    $800 - $2,000
                   </div>
                   <p
                     style="
@@ -3001,69 +3663,268 @@
     <section id="project-timeline" style="padding: 80px 20px">
       <div style="max-width: 1000px; margin: 0 auto">
         <h2 class="section-title">Project Timeline</h2>
-        <p class="section-subtitle">Typical project lifecycle from start to finish</p>
+        <p class="section-subtitle">
+          Typical project lifecycle from start to finish
+        </p>
         <div style="position: relative; margin-top: 60px">
           <!-- Timeline Line -->
-          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 4px; height: 100%; background: linear-gradient(180deg, var(--primary), var(--secondary)); border-radius: 10px"></div>
-          
+          <div
+            style="
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 4px;
+              height: 100%;
+              background: linear-gradient(
+                180deg,
+                var(--primary),
+                var(--secondary)
+              );
+              border-radius: 10px;
+            "
+          ></div>
+
           <!-- Timeline Items -->
           <div style="position: relative">
             <!-- Week 1 -->
-            <div style="display: flex; align-items: center; margin-bottom: 80px; position: relative">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                margin-bottom: 80px;
+                position: relative;
+              "
+            >
               <div style="flex: 1; text-align: right; padding-right: 40px">
-                <h3 style="color: var(--text); font-size: 1.3em; margin-bottom: 10px">Week 1: Discovery</h3>
-                <p style="color: var(--text-light)">Requirements gathering, project planning, and timeline establishment</p>
+                <h3
+                  style="
+                    color: var(--text);
+                    font-size: 1.3em;
+                    margin-bottom: 10px;
+                  "
+                >
+                  Week 1: Discovery
+                </h3>
+                <p style="color: var(--text-light)">
+                  Requirements gathering, project planning, and timeline
+                  establishment
+                </p>
               </div>
-              <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; box-shadow: 0 0 20px rgba(102, 126, 234, 0.5)">
-                <i class="fas fa-clipboard-list" style="color: white; font-size: 1.5em"></i>
+              <div
+                style="
+                  width: 60px;
+                  height: 60px;
+                  background: linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                  );
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  position: relative;
+                  z-index: 1;
+                  box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+                "
+              >
+                <i
+                  class="fas fa-clipboard-list"
+                  style="color: white; font-size: 1.5em"
+                ></i>
               </div>
               <div style="flex: 1; padding-left: 40px"></div>
             </div>
 
             <!-- Week 2 -->
-            <div style="display: flex; align-items: center; margin-bottom: 80px; position: relative">
-              <div style="flex: 1; text-align: right; padding-right: 40px"></div>
-              <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; box-shadow: 0 0 20px rgba(102, 126, 234, 0.5)">
-                <i class="fas fa-pencil-ruler" style="color: white; font-size: 1.5em"></i>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                margin-bottom: 80px;
+                position: relative;
+              "
+            >
+              <div
+                style="flex: 1; text-align: right; padding-right: 40px"
+              ></div>
+              <div
+                style="
+                  width: 60px;
+                  height: 60px;
+                  background: linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                  );
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  position: relative;
+                  z-index: 1;
+                  box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+                "
+              >
+                <i
+                  class="fas fa-pencil-ruler"
+                  style="color: white; font-size: 1.5em"
+                ></i>
               </div>
               <div style="flex: 1; padding-left: 40px">
-                <h3 style="color: var(--text); font-size: 1.3em; margin-bottom: 10px">Week 2: Design</h3>
-                <p style="color: var(--text-light)">UI/UX design, architecture planning, and mockup creation</p>
+                <h3
+                  style="
+                    color: var(--text);
+                    font-size: 1.3em;
+                    margin-bottom: 10px;
+                  "
+                >
+                  Week 2: Design
+                </h3>
+                <p style="color: var(--text-light)">
+                  UI/UX design, architecture planning, and mockup creation
+                </p>
               </div>
             </div>
 
             <!-- Week 3-4 -->
-            <div style="display: flex; align-items: center; margin-bottom: 80px; position: relative">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                margin-bottom: 80px;
+                position: relative;
+              "
+            >
               <div style="flex: 1; text-align: right; padding-right: 40px">
-                <h3 style="color: var(--text); font-size: 1.3em; margin-bottom: 10px">Week 3-4: Development</h3>
-                <p style="color: var(--text-light)">Core functionality implementation, regular progress updates</p>
+                <h3
+                  style="
+                    color: var(--text);
+                    font-size: 1.3em;
+                    margin-bottom: 10px;
+                  "
+                >
+                  Week 3-4: Development
+                </h3>
+                <p style="color: var(--text-light)">
+                  Core functionality implementation, regular progress updates
+                </p>
               </div>
-              <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; box-shadow: 0 0 20px rgba(102, 126, 234, 0.5)">
-                <i class="fas fa-code" style="color: white; font-size: 1.5em"></i>
+              <div
+                style="
+                  width: 60px;
+                  height: 60px;
+                  background: linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                  );
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  position: relative;
+                  z-index: 1;
+                  box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+                "
+              >
+                <i
+                  class="fas fa-code"
+                  style="color: white; font-size: 1.5em"
+                ></i>
               </div>
               <div style="flex: 1; padding-left: 40px"></div>
             </div>
 
             <!-- Week 5 -->
-            <div style="display: flex; align-items: center; margin-bottom: 80px; position: relative">
-              <div style="flex: 1; text-align: right; padding-right: 40px"></div>
-              <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; box-shadow: 0 0 20px rgba(102, 126, 234, 0.5)">
-                <i class="fas fa-bug" style="color: white; font-size: 1.5em"></i>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                margin-bottom: 80px;
+                position: relative;
+              "
+            >
+              <div
+                style="flex: 1; text-align: right; padding-right: 40px"
+              ></div>
+              <div
+                style="
+                  width: 60px;
+                  height: 60px;
+                  background: linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                  );
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  position: relative;
+                  z-index: 1;
+                  box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+                "
+              >
+                <i
+                  class="fas fa-bug"
+                  style="color: white; font-size: 1.5em"
+                ></i>
               </div>
               <div style="flex: 1; padding-left: 40px">
-                <h3 style="color: var(--text); font-size: 1.3em; margin-bottom: 10px">Week 5: Testing</h3>
-                <p style="color: var(--text-light)">Comprehensive testing, bug fixes, and optimization</p>
+                <h3
+                  style="
+                    color: var(--text);
+                    font-size: 1.3em;
+                    margin-bottom: 10px;
+                  "
+                >
+                  Week 5: Testing
+                </h3>
+                <p style="color: var(--text-light)">
+                  Comprehensive testing, bug fixes, and optimization
+                </p>
               </div>
             </div>
 
             <!-- Week 6 -->
             <div style="display: flex; align-items: center; position: relative">
               <div style="flex: 1; text-align: right; padding-right: 40px">
-                <h3 style="color: var(--text); font-size: 1.3em; margin-bottom: 10px">Week 6: Deployment</h3>
-                <p style="color: var(--text-light)">Final delivery, deployment, and documentation handoff</p>
+                <h3
+                  style="
+                    color: var(--text);
+                    font-size: 1.3em;
+                    margin-bottom: 10px;
+                  "
+                >
+                  Week 6: Deployment
+                </h3>
+                <p style="color: var(--text-light)">
+                  Final delivery, deployment, and documentation handoff
+                </p>
               </div>
-              <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; box-shadow: 0 0 20px rgba(102, 126, 234, 0.5)">
-                <i class="fas fa-rocket" style="color: white; font-size: 1.5em"></i>
+              <div
+                style="
+                  width: 60px;
+                  height: 60px;
+                  background: linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                  );
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  position: relative;
+                  z-index: 1;
+                  box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+                "
+              >
+                <i
+                  class="fas fa-rocket"
+                  style="color: white; font-size: 1.5em"
+                ></i>
               </div>
               <div style="flex: 1; padding-left: 40px"></div>
             </div>
@@ -3251,26 +4112,112 @@
     </section>
 
     <!-- Social Proof Stats -->
-    <section id="social-proof" style="background: var(--bg-dark); padding: 60px 20px">
+    <section
+      id="social-proof"
+      style="background: var(--bg-dark); padding: 60px 20px"
+    >
       <div style="max-width: 1200px; margin: 0 auto">
         <h2 class="section-title">Trusted by Developers</h2>
         <p class="section-subtitle">Join hundreds of satisfied clients</p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-top: 50px">
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+          "
+        >
           <div style="text-align: center">
-            <div style="font-size: 3em; font-weight: bold; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px" class="counter" data-target="150">0</div>
-            <p style="color: var(--text-light); font-size: 1.1em">Projects Completed</p>
+            <div
+              style="
+                font-size: 3em;
+                font-weight: bold;
+                background: linear-gradient(
+                  135deg,
+                  var(--primary),
+                  var(--secondary)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-bottom: 10px;
+              "
+              class="counter"
+              data-target="150"
+            >
+              0
+            </div>
+            <p style="color: var(--text-light); font-size: 1.1em">
+              Projects Completed
+            </p>
           </div>
           <div style="text-align: center">
-            <div style="font-size: 3em; font-weight: bold; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px" class="counter" data-target="98">0</div>
-            <p style="color: var(--text-light); font-size: 1.1em">Client Satisfaction %</p>
+            <div
+              style="
+                font-size: 3em;
+                font-weight: bold;
+                background: linear-gradient(
+                  135deg,
+                  var(--primary),
+                  var(--secondary)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-bottom: 10px;
+              "
+              class="counter"
+              data-target="98"
+            >
+              0
+            </div>
+            <p style="color: var(--text-light); font-size: 1.1em">
+              Client Satisfaction %
+            </p>
           </div>
           <div style="text-align: center">
-            <div style="font-size: 3em; font-weight: bold; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px" class="counter" data-target="5">0</div>
-            <p style="color: var(--text-light); font-size: 1.1em">Years Experience</p>
+            <div
+              style="
+                font-size: 3em;
+                font-weight: bold;
+                background: linear-gradient(
+                  135deg,
+                  var(--primary),
+                  var(--secondary)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-bottom: 10px;
+              "
+              class="counter"
+              data-target="5"
+            >
+              0
+            </div>
+            <p style="color: var(--text-light); font-size: 1.1em">
+              Years Experience
+            </p>
           </div>
           <div style="text-align: center">
-            <div style="font-size: 3em; font-weight: bold; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px" class="counter" data-target="24">0</div>
-            <p style="color: var(--text-light); font-size: 1.1em">Hours Response Time</p>
+            <div
+              style="
+                font-size: 3em;
+                font-weight: bold;
+                background: linear-gradient(
+                  135deg,
+                  var(--primary),
+                  var(--secondary)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-bottom: 10px;
+              "
+              class="counter"
+              data-target="24"
+            >
+              0
+            </div>
+            <p style="color: var(--text-light); font-size: 1.1em">
+              Hours Response Time
+            </p>
           </div>
         </div>
       </div>
@@ -3281,79 +4228,285 @@
       <div style="max-width: 800px; margin: 0 auto">
         <h2 class="section-title">Project Cost Calculator</h2>
         <p class="section-subtitle">Get an instant estimate for your project</p>
-        <div style="background: var(--bg-card); padding: 40px; border-radius: 15px; margin-top: 40px">
+        <div
+          style="
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+          "
+        >
           <div style="margin-bottom: 30px">
-            <label style="display: block; margin-bottom: 10px; color: var(--text); font-weight: 600">Project Type</label>
-            <select id="project-type" style="width: 100%; padding: 15px; background: var(--light); color: var(--text); border: 2px solid rgba(102, 126, 234, 0.3); border-radius: 10px; font-size: 1em">
-              <option value="500">Discord Bot - Basic ($500)</option>
-              <option value="1500">Discord Bot - Advanced ($1,500)</option>
+            <label
+              style="
+                display: block;
+                margin-bottom: 10px;
+                color: var(--text);
+                font-weight: 600;
+              "
+              >Project Type</label
+            >
+            <select
+              id="project-type"
+              style="
+                width: 100%;
+                padding: 15px;
+                background: var(--light);
+                color: var(--text);
+                border: 2px solid rgba(102, 126, 234, 0.3);
+                border-radius: 10px;
+                font-size: 1em;
+              "
+            >
+              <option value="500">Custom Discord Bot - Basic ($500)</option>
+              <option value="1500">
+                Custom Discord Bot - Advanced ($1,500)
+              </option>
+              <option value="300">
+                Premade Bot + Customization ($300-$800)
+              </option>
               <option value="800">Website - Portfolio ($800)</option>
               <option value="2000">Website - E-commerce ($2,000)</option>
               <option value="2500">Custom Solution ($2,500+)</option>
             </select>
           </div>
           <div style="margin-bottom: 30px">
-            <label style="display: block; margin-bottom: 10px; color: var(--text); font-weight: 600">Additional Features</label>
-            <div style="display: flex; align-items: center; margin-bottom: 15px">
-              <input type="checkbox" id="hosting" value="50" style="margin-right: 10px; width: 20px; height: 20px">
-              <label for="hosting" style="color: var(--text)">Hosting Setup (+$50/month)</label>
+            <label
+              style="
+                display: block;
+                margin-bottom: 10px;
+                color: var(--text);
+                font-weight: 600;
+              "
+              >Additional Features</label
+            >
+            <div
+              style="display: flex; align-items: center; margin-bottom: 15px"
+            >
+              <input
+                type="checkbox"
+                id="hosting"
+                value="50"
+                style="margin-right: 10px; width: 20px; height: 20px"
+              />
+              <label for="hosting" style="color: var(--text)"
+                >Hosting Setup (+$50/month)</label
+              >
             </div>
-            <div style="display: flex; align-items: center; margin-bottom: 15px">
-              <input type="checkbox" id="maintenance" value="100" style="margin-right: 10px; width: 20px; height: 20px">
-              <label for="maintenance" style="color: var(--text)">Extended Maintenance (+$100/month)</label>
+            <div
+              style="display: flex; align-items: center; margin-bottom: 15px"
+            >
+              <input
+                type="checkbox"
+                id="maintenance"
+                value="100"
+                style="margin-right: 10px; width: 20px; height: 20px"
+              />
+              <label for="maintenance" style="color: var(--text)"
+                >Extended Maintenance (+$100/month)</label
+              >
             </div>
             <div style="display: flex; align-items: center">
-              <input type="checkbox" id="rush" value="500" style="margin-right: 10px; width: 20px; height: 20px">
-              <label for="rush" style="color: var(--text)">Rush Delivery (+$500)</label>
+              <input
+                type="checkbox"
+                id="rush"
+                value="500"
+                style="margin-right: 10px; width: 20px; height: 20px"
+              />
+              <label for="rush" style="color: var(--text)"
+                >Rush Delivery (+$500)</label
+              >
             </div>
           </div>
-          <div style="border-top: 2px solid rgba(102, 126, 234, 0.3); padding-top: 30px">
-            <div style="display: flex; justify-content: space-between; align-items: center">
-              <span style="font-size: 1.5em; color: var(--text); font-weight: 600">Estimated Total:</span>
-              <span id="total-price" style="font-size: 2em; font-weight: bold; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent">$500</span>
+          <div
+            style="
+              border-top: 2px solid rgba(102, 126, 234, 0.3);
+              padding-top: 30px;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <span
+                style="font-size: 1.5em; color: var(--text); font-weight: 600"
+                >Estimated Total:</span
+              >
+              <span
+                id="total-price"
+                style="
+                  font-size: 2em;
+                  font-weight: bold;
+                  background: linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                  );
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                "
+                >$500</span
+              >
             </div>
-            <p style="color: var(--text-light); margin-top: 15px; font-size: 0.9em">*Final price may vary based on project complexity and requirements</p>
+            <p
+              style="
+                color: var(--text-light);
+                margin-top: 15px;
+                font-size: 0.9em;
+              "
+            >
+              *Final price may vary based on project complexity and requirements
+            </p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Tech Stack with Logos -->
-    <section id="tech-stack" style="background: var(--bg-dark); padding: 80px 20px">
+    <section
+      id="tech-stack"
+      style="background: var(--bg-dark); padding: 80px 20px"
+    >
       <div style="max-width: 1200px; margin: 0 auto">
         <h2 class="section-title">Tech Stack</h2>
         <p class="section-subtitle">Technologies & tools I use daily</p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 30px; margin-top: 50px">
-          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
-            <i class="fab fa-js" style="font-size: 3em; color: #F7DF1E; margin-bottom: 15px"></i>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+          "
+        >
+          <div
+            style="
+              background: var(--bg-card);
+              padding: 30px;
+              border-radius: 15px;
+              text-align: center;
+              transition: transform 0.3s ease;
+            "
+            class="tech-item"
+          >
+            <i
+              class="fab fa-js"
+              style="font-size: 3em; color: #f7df1e; margin-bottom: 15px"
+            ></i>
             <p style="color: var(--text); font-weight: 600">JavaScript</p>
           </div>
-          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
-            <i class="fab fa-python" style="font-size: 3em; color: #3776AB; margin-bottom: 15px"></i>
+          <div
+            style="
+              background: var(--bg-card);
+              padding: 30px;
+              border-radius: 15px;
+              text-align: center;
+              transition: transform 0.3s ease;
+            "
+            class="tech-item"
+          >
+            <i
+              class="fab fa-python"
+              style="font-size: 3em; color: #3776ab; margin-bottom: 15px"
+            ></i>
             <p style="color: var(--text); font-weight: 600">Python</p>
           </div>
-          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
-            <i class="fab fa-node-js" style="font-size: 3em; color: #339933; margin-bottom: 15px"></i>
+          <div
+            style="
+              background: var(--bg-card);
+              padding: 30px;
+              border-radius: 15px;
+              text-align: center;
+              transition: transform 0.3s ease;
+            "
+            class="tech-item"
+          >
+            <i
+              class="fab fa-node-js"
+              style="font-size: 3em; color: #339933; margin-bottom: 15px"
+            ></i>
             <p style="color: var(--text); font-weight: 600">Node.js</p>
           </div>
-          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
-            <i class="fab fa-react" style="font-size: 3em; color: #61DAFB; margin-bottom: 15px"></i>
+          <div
+            style="
+              background: var(--bg-card);
+              padding: 30px;
+              border-radius: 15px;
+              text-align: center;
+              transition: transform 0.3s ease;
+            "
+            class="tech-item"
+          >
+            <i
+              class="fab fa-react"
+              style="font-size: 3em; color: #61dafb; margin-bottom: 15px"
+            ></i>
             <p style="color: var(--text); font-weight: 600">React</p>
           </div>
-          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
-            <i class="fab fa-docker" style="font-size: 3em; color: #2496ED; margin-bottom: 15px"></i>
+          <div
+            style="
+              background: var(--bg-card);
+              padding: 30px;
+              border-radius: 15px;
+              text-align: center;
+              transition: transform 0.3s ease;
+            "
+            class="tech-item"
+          >
+            <i
+              class="fab fa-docker"
+              style="font-size: 3em; color: #2496ed; margin-bottom: 15px"
+            ></i>
             <p style="color: var(--text); font-weight: 600">Docker</p>
           </div>
-          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
-            <i class="fab fa-git-alt" style="font-size: 3em; color: #F05032; margin-bottom: 15px"></i>
+          <div
+            style="
+              background: var(--bg-card);
+              padding: 30px;
+              border-radius: 15px;
+              text-align: center;
+              transition: transform 0.3s ease;
+            "
+            class="tech-item"
+          >
+            <i
+              class="fab fa-git-alt"
+              style="font-size: 3em; color: #f05032; margin-bottom: 15px"
+            ></i>
             <p style="color: var(--text); font-weight: 600">Git</p>
           </div>
-          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
-            <i class="fab fa-discord" style="font-size: 3em; color: #5865F2; margin-bottom: 15px"></i>
+          <div
+            style="
+              background: var(--bg-card);
+              padding: 30px;
+              border-radius: 15px;
+              text-align: center;
+              transition: transform 0.3s ease;
+            "
+            class="tech-item"
+          >
+            <i
+              class="fab fa-discord"
+              style="font-size: 3em; color: #5865f2; margin-bottom: 15px"
+            ></i>
             <p style="color: var(--text); font-weight: 600">Discord.js</p>
           </div>
-          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s ease" class="tech-item">
-            <i class="fas fa-database" style="font-size: 3em; color: #47A248; margin-bottom: 15px"></i>
+          <div
+            style="
+              background: var(--bg-card);
+              padding: 30px;
+              border-radius: 15px;
+              text-align: center;
+              transition: transform 0.3s ease;
+            "
+            class="tech-item"
+          >
+            <i
+              class="fas fa-database"
+              style="font-size: 3em; color: #47a248; margin-bottom: 15px"
+            ></i>
             <p style="color: var(--text); font-weight: 600">MongoDB</p>
           </div>
         </div>
@@ -3365,13 +4518,56 @@
       <div style="max-width: 1200px; margin: 0 auto">
         <h2 class="section-title">Code Showcase</h2>
         <p class="section-subtitle">Examples of my clean, efficient code</p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 30px; margin-top: 50px">
-          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; border: 2px solid rgba(102, 126, 234, 0.3)">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-              <h3 style="color: var(--text); font-size: 1.2em">Discord Bot Command</h3>
-              <span style="background: rgba(102, 126, 234, 0.2); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.9em">JavaScript</span>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+          "
+        >
+          <div
+            style="
+              background: var(--bg-card);
+              padding: 30px;
+              border-radius: 15px;
+              border: 2px solid rgba(102, 126, 234, 0.3);
+            "
+          >
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+              "
+            >
+              <h3 style="color: var(--text); font-size: 1.2em">
+                Discord Bot Command
+              </h3>
+              <span
+                style="
+                  background: rgba(102, 126, 234, 0.2);
+                  color: var(--primary);
+                  padding: 5px 15px;
+                  border-radius: 20px;
+                  font-size: 0.9em;
+                "
+                >JavaScript</span
+              >
             </div>
-            <pre style="background: var(--dark); padding: 20px; border-radius: 10px; overflow-x: auto; color: #e0e0e0; font-family: 'Courier New', monospace; font-size: 0.9em; line-height: 1.6"><code>client.on('messageCreate', async (msg) => {
+            <pre
+              style="
+                background: var(--dark);
+                padding: 20px;
+                border-radius: 10px;
+                overflow-x: auto;
+                color: #e0e0e0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                line-height: 1.6;
+              "
+            ><code>client.on('messageCreate', async (msg) => {
   if (msg.content === '!stats') {
     const stats = await getServerStats();
     const embed = new EmbedBuilder()
@@ -3385,12 +4581,46 @@
   }
 });</code></pre>
           </div>
-          <div style="background: var(--bg-card); padding: 30px; border-radius: 15px; border: 2px solid rgba(102, 126, 234, 0.3)">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+          <div
+            style="
+              background: var(--bg-card);
+              padding: 30px;
+              border-radius: 15px;
+              border: 2px solid rgba(102, 126, 234, 0.3);
+            "
+          >
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+              "
+            >
               <h3 style="color: var(--text); font-size: 1.2em">API Endpoint</h3>
-              <span style="background: rgba(102, 126, 234, 0.2); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.9em">Node.js</span>
+              <span
+                style="
+                  background: rgba(102, 126, 234, 0.2);
+                  color: var(--primary);
+                  padding: 5px 15px;
+                  border-radius: 20px;
+                  font-size: 0.9em;
+                "
+                >Node.js</span
+              >
             </div>
-            <pre style="background: var(--dark); padding: 20px; border-radius: 10px; overflow-x: auto; color: #e0e0e0; font-family: 'Courier New', monospace; font-size: 0.9em; line-height: 1.6"><code>app.get('/api/v2/stats', async (req, res) => {
+            <pre
+              style="
+                background: var(--dark);
+                padding: 20px;
+                border-radius: 10px;
+                overflow-x: auto;
+                color: #e0e0e0;
+                font-family: 'Courier New', monospace;
+                font-size: 0.9em;
+                line-height: 1.6;
+              "
+            ><code>app.get('/api/v2/stats', async (req, res) => {
   try {
     const stats = {
       servers: client.guilds.cache.size,
@@ -3772,61 +5002,65 @@
 
     <script>
       // Loading Screen
-      window.addEventListener('load', () => {
+      window.addEventListener("load", () => {
         setTimeout(() => {
-          document.getElementById('loading-screen').classList.add('hidden');
+          document.getElementById("loading-screen").classList.add("hidden");
         }, 1000);
       });
 
       // Scroll Progress Bar
-      window.addEventListener('scroll', () => {
-        const scrollProgress = document.getElementById('scroll-progress');
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      window.addEventListener("scroll", () => {
+        const scrollProgress = document.getElementById("scroll-progress");
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
         const progress = (scrollTop / scrollHeight) * 100;
-        scrollProgress.style.width = progress + '%';
+        scrollProgress.style.width = progress + "%";
       });
 
       // Back to Top Button
-      const backToTopBtn = document.getElementById('back-to-top');
-      window.addEventListener('scroll', () => {
+      const backToTopBtn = document.getElementById("back-to-top");
+      window.addEventListener("scroll", () => {
         if (window.pageYOffset > 300) {
-          backToTopBtn.classList.add('visible');
+          backToTopBtn.classList.add("visible");
         } else {
-          backToTopBtn.classList.remove('visible');
+          backToTopBtn.classList.remove("visible");
         }
       });
 
-      backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
 
       // Mobile Menu
-      const mobileMenu = document.getElementById('mobile-menu');
-      const mobileMenuClose = document.getElementById('mobile-menu-close');
-      
-      // Add mobile menu toggle button functionality
-      document.addEventListener('DOMContentLoaded', () => {
-        const navLinks = document.querySelector('.nav-links');
-        if (navLinks) {
-          const menuToggle = document.createElement('div');
-          menuToggle.className = 'mobile-menu-toggle';
-          menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-          menuToggle.style.cssText = 'display: none; font-size: 1.5em; color: white; cursor: pointer;';
-          document.querySelector('.nav-container').appendChild(menuToggle);
+      const mobileMenu = document.getElementById("mobile-menu");
+      const mobileMenuClose = document.getElementById("mobile-menu-close");
 
-          menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
+      // Add mobile menu toggle button functionality
+      document.addEventListener("DOMContentLoaded", () => {
+        const navLinks = document.querySelector(".nav-links");
+        if (navLinks) {
+          const menuToggle = document.createElement("div");
+          menuToggle.className = "mobile-menu-toggle";
+          menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+          menuToggle.style.cssText =
+            "display: none; font-size: 1.5em; color: white; cursor: pointer;";
+          document.querySelector(".nav-container").appendChild(menuToggle);
+
+          menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.add("active");
           });
 
           // Show toggle on mobile
-          const mediaQuery = window.matchMedia('(max-width: 768px)');
+          const mediaQuery = window.matchMedia("(max-width: 768px)");
           const handleMobile = (e) => {
             if (e.matches) {
-              menuToggle.style.display = 'block';
+              menuToggle.style.display = "block";
             } else {
-              menuToggle.style.display = 'none';
-              mobileMenu.classList.remove('active');
+              menuToggle.style.display = "none";
+              mobileMenu.classList.remove("active");
             }
           };
           mediaQuery.addListener(handleMobile);
@@ -3834,33 +5068,33 @@
         }
       });
 
-      mobileMenuClose.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
+      mobileMenuClose.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
       });
 
       // Close mobile menu when clicking a link
-      document.querySelectorAll('.mobile-menu-links a').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.remove('active');
+      document.querySelectorAll(".mobile-menu-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("active");
         });
       });
 
       // Skill Progress Bars Animation
       const animateSkillBars = () => {
-        const skillBars = document.querySelectorAll('.skill-progress-fill');
-        skillBars.forEach(bar => {
-          const progress = bar.getAttribute('data-progress');
-          bar.style.width = progress + '%';
+        const skillBars = document.querySelectorAll(".skill-progress-fill");
+        skillBars.forEach((bar) => {
+          const progress = bar.getAttribute("data-progress");
+          bar.style.width = progress + "%";
         });
       };
 
       // Trigger skill bars when in view
       const skillObserverOptions = {
-        threshold: 0.5
+        threshold: 0.5,
       };
 
       const skillObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             animateSkillBars();
             skillObserver.unobserve(entry.target);
@@ -3868,14 +5102,14 @@
         });
       }, skillObserverOptions);
 
-      const skillsSection = document.getElementById('skills');
+      const skillsSection = document.getElementById("skills");
       if (skillsSection) {
         skillObserver.observe(skillsSection);
       }
 
       // Animated Counters for Social Proof
       function animateCounter(element) {
-        const target = parseInt(element.getAttribute('data-target'));
+        const target = parseInt(element.getAttribute("data-target"));
         const duration = 2000;
         const increment = target / (duration / 16);
         let current = 0;
@@ -3895,11 +5129,11 @@
 
       // Trigger counters when in view
       const counterObserverOptions = {
-        threshold: 0.5
+        threshold: 0.5,
       };
 
       const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             animateCounter(entry.target);
             counterObserver.unobserve(entry.target);
@@ -3907,20 +5141,20 @@
         });
       }, counterObserverOptions);
 
-      document.querySelectorAll('.counter').forEach(counter => {
+      document.querySelectorAll(".counter").forEach((counter) => {
         counterObserver.observe(counter);
       });
 
       // Pricing Calculator
-      const projectTypeSelect = document.getElementById('project-type');
-      const hostingCheckbox = document.getElementById('hosting');
-      const maintenanceCheckbox = document.getElementById('maintenance');
-      const rushCheckbox = document.getElementById('rush');
-      const totalPriceElement = document.getElementById('total-price');
+      const projectTypeSelect = document.getElementById("project-type");
+      const hostingCheckbox = document.getElementById("hosting");
+      const maintenanceCheckbox = document.getElementById("maintenance");
+      const rushCheckbox = document.getElementById("rush");
+      const totalPriceElement = document.getElementById("total-price");
 
       function updatePrice() {
         let total = parseInt(projectTypeSelect.value);
-        
+
         if (hostingCheckbox.checked) {
           total += parseInt(hostingCheckbox.value);
         }
@@ -3931,21 +5165,21 @@
           total += parseInt(rushCheckbox.value);
         }
 
-        totalPriceElement.textContent = '$' + total.toLocaleString();
+        totalPriceElement.textContent = "$" + total.toLocaleString();
       }
 
-      projectTypeSelect.addEventListener('change', updatePrice);
-      hostingCheckbox.addEventListener('change', updatePrice);
-      maintenanceCheckbox.addEventListener('change', updatePrice);
-      rushCheckbox.addEventListener('change', updatePrice);
+      projectTypeSelect.addEventListener("change", updatePrice);
+      hostingCheckbox.addEventListener("change", updatePrice);
+      maintenanceCheckbox.addEventListener("change", updatePrice);
+      rushCheckbox.addEventListener("change", updatePrice);
 
       // Tech Stack Hover Effect
-      document.querySelectorAll('.tech-item').forEach(item => {
-        item.addEventListener('mouseenter', function() {
-          this.style.transform = 'translateY(-10px)';
+      document.querySelectorAll(".tech-item").forEach((item) => {
+        item.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-10px)";
         });
-        item.addEventListener('mouseleave', function() {
-          this.style.transform = 'translateY(0)';
+        item.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0)";
         });
       });
 
